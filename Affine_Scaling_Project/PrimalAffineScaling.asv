@@ -1,0 +1,68 @@
+function x = PrimalAffineScaling(A,b,c)
+%PRIMALAFFINESCALING : Takes as input the constraint matrix A that has n
+%columns
+%the independent term vector b and
+%the; cost vector c and applies the PrimalAffineScaling algorithm
+
+M = 1000; % arbitrary neihter big neither small value for big M algorithm
+n = size(A,2);
+
+% Compute infeasibilities
+en = ones(n,1);
+r = b - A*en;
+
+% Extend A with additional column r
+A = [A r];
+n = n+1;
+
+%extend cost vector
+c = [c' M]';
+
+% create x0 as 1...1 (n+1 ones)
+x = ones(n,1);
+
+%set D = I, y = (ADA')^(-1)ADc
+D = eye(n); % Initialize D as the identity matrix
+y = (A * D * A') \ (A * D * c); % Compute y using the formula
+
+% set k = 0, eps = 10^(-6) and rho in [0.95, 0.9995]
+k = 0;
+eps = 1e-6;
+rho = 0.995;
+
+while norm(c'*x-b'*y) / (1+norm(c'*x)) > eps
+
+    %compute z = c - A'*y
+    z = c-A'*y;
+
+    %compute deltax = -D*z
+    dx = -D*z
+    if dx > 0
+        % STOP and print that problem is unbounded
+        fprintf('The problem is unbounded.\n');
+        return;
+    end
+
+    %compute alfa
+    alpha = rho*min(-x_i / dx_i : dx_i < 0);
+
+    % compute x_k+1 = x_k + alpha*dx
+    x = x + alpha*dx;
+
+    % Update k
+    k = k + 1;
+
+    % Compute X^k: X^k = diag(x_1^k, ..., x_n^k)
+    Xk = diag(x);
+
+    %Compute D = (X^k)^2
+    D = Xk^2;
+
+    % y for the next iteration
+    y = (A * D * A') \ (A * D * c);
+    
+end
+
+% if last component of x is not ero then STOP INFEASIBLE
+% 
+if 
