@@ -4,7 +4,18 @@ function x = PrimalAffineScaling(A,b,c)
 %the independent term vector b and
 %the; cost vector c and applies the PrimalAffineScaling algorithm
 
-M = 1000; % arbitrary neihter big neither small value for big M algorithm
+%work on A so that we only work with full row rank matrix
+[Q,R,E] = qr(A',0);          % QR sobre A'
+tol = 1e-12;
+r = sum(abs(diag(R)) > tol);
+ind = sort(E(1:r));          % filas independientes de A
+A = A(ind,:);
+b = b(ind);
+
+
+
+%M = 1e6 * max(1, norm(c, inf)); % arbitrary neihter big neither small value for big M algorithm
+M = 1000;
 eps_components = -1e-12; % tolerance for delta X components
 n = size(A,2);
 
@@ -15,6 +26,9 @@ r = b - A*en;
 % Extend A with additional column r
 A = [A r];
 n = n+1;
+
+% for having information
+[m_ext,n_ext] = size(A);
 
 %extend cost vector
 c = [c' M]';
@@ -29,7 +43,7 @@ y = (A * D * A') \ (A * D * c); % Compute y using the formula
 % set k = 0, eps = 10^(-6) and rho in [0.95, 0.9995]
 k = 0;
 eps = 1e-6;
-rho = 0.995;
+rho = 0.95;
 
 while abs(c'*x-b'*y) / (1+abs(c'*x)) > eps
 
@@ -63,12 +77,18 @@ while abs(c'*x-b'*y) / (1+abs(c'*x)) > eps
     
 end
 
+% for printing information later
+obj_value = c'*x;
+fprintf('\n===== Primal Affine Scaling Results =====\n');
+fprintf('Iterations: %d\n', k);
+fprintf('Objective value (extended problem): %.10f\n', obj_value);
+
 % if last component of x is not ero then STOP INFEASIBLE
 % else STOP and the optimal solution is the found x, return it
 if abs(x(end)) > eps
-    fprintf('The problem is infeasible.\n');
+    fprintf('Status: INFEASIBLE\n');
 else
-    % return x without the artifical variable
-    x = x(1:end-1);
-    fprintf('Optimal solution found.\n');
+    x = x(1:end-1);  % remove artificial variable
+    fprintf('Status: OPTIMAL\n');
+    fprintf('Optimal objective value: %.10f\n', c(1:end-1)'*x);
 end

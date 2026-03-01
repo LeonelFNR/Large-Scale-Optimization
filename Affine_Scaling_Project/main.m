@@ -1,33 +1,117 @@
-% Practical application of primal affine scaling algorithm
+% In this script we introduce several test cases
+% and call the function Compare_Performance to 
+% compare primal affine scaling vs. lineprog
 
-% The input parameters to the code will be:
-%  the cost vector c, 
-% the constraints matrix A, 
-% and the right-hand-side vector b.  
-% The constraints matrix A will have to be expanded 
-% with a new variable needed by the Big-M method.
-
-%Obtain somehow inputs A, b, c
-% ===== TEST LP =====
-% min 3x1 + x2
-% s.t.
-% 2x1 + x2 - s1 = 2
-% 3x1 + 4x2 + s2 = 12
-% x >= 0
-
+%% FEASIBLE 1 — Small well-scaled
 A = [2 1 -1 0;
      3 4  0 1];
 
 b = [2;
      12];
 
-c = [3;
-     1;
-     0;
-     0];   % slacks tienen coste 0
-%Call for the method of primal affine scaling and return the x coords
-x = PrimalAffineScaling(A,b,c);
+c = [3;1;0;0];
 
-%print x
-disp('Optimal solution coordinates:');
-disp(x);
+Compare_Performance(A,b,c);
+
+%% FEASIBLE 2 — Multiple active constraints
+A = [1 1 1 0 0;
+     2 1 0 1 0;
+     1 3 0 0 1];
+
+b = [5;
+     8;
+     9];
+
+c = [2;1;0;0;0];
+
+Compare_Performance(A,b,c);
+
+%% FEASIBLE 3 — Poorly scaled problem
+A = [1e-3  2    -1  0;
+     5e2   1     0  1];
+
+b = [1;
+     1000];
+
+c = [1;3;0;0];
+
+Compare_Performance(A,b,c);
+
+
+%% UNBOUNDED 1 — Simple ray
+A = [1 -1 1];
+
+b = [1];
+
+c = [-1;0;0];   % minimizar -x1 ⇒ crecer x1 indefinidamente
+
+Compare_Performance(A,b,c);
+
+%% UNBOUNDED 2 — Higher dimension
+A = [1 1 1 0;
+     0 1 0 1];
+
+b = [2;
+     1];
+
+c = [-2;0;0;0];
+
+Compare_Performance(A,b,c);
+
+%% INFEASIBLE 1 — Contradictory constraints
+A = [1 -1;
+     1  0];
+
+b = [1;
+     0];
+
+c = [1;0];
+
+Compare_Performance(A,b,c);
+
+%% INFEASIBLE 2 — Parallel hyperplanes
+A = [1 1;
+     1 1];
+
+b = [1;
+     3];
+
+c = [1;1];
+
+Compare_Performance(A,b,c);
+
+%% MULTIPLE OPTIMA
+A = [1 1 1];
+
+b = [2];
+
+c = [1;1;0];  % x3 libre ⇒ infinitas soluciones óptimas
+
+Compare_Performance(A,b,c);
+
+
+%% RANDOM LARGE FEASIBLE
+rng(1);
+m = 10;
+n = 20;
+
+A = rand(m,n);
+x_true = rand(n,1);
+b = A*x_true;     % garantizamos factibilidad
+c = rand(n,1);
+
+Compare_Performance(A,b,c);
+
+
+%% ILL-CONDITIONED (scaling test)
+A = [1e-6  1   0 0;
+     0     1e6 1 0;
+     1     0   0 1];
+
+b = [1;
+     1e6;
+     2];
+
+c = [1;1;0;0];
+
+Compare_Performance(A,b,c);
