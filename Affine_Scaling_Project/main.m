@@ -115,3 +115,15 @@ b = [1;
 c = [1;1;0;0];
 
 Compare_Performance(A,b,c);
+
+%% lp_25fv47.mat
+load('lp_25fv47.mat');  % Load the linear programming problem data
+Compare_Performance(Problem.A, Problem.b, Problem.aux.c);  % Compare performance on the loaded problem
+
+%% lp_beaconfd.mat
+load('lp_beaconfd.mat');  % Load the next linear programming problem data
+Compare_Performance(Problem.A, Problem.b, Problem.aux.c);  % Compare performance on the loaded problem
+
+%% lp_bore3d.mat
+load('lp_bore3d.mat');  % Load the next linear programming problem data
+Compare_Performance(Problem.A, Problem.b, Problem.aux.c);  % Compare performance on the loaded problem

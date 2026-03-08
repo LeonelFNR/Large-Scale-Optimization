@@ -14,7 +14,8 @@ fprintf('Number of nonzeros in A: %d\n', nnz(A));
 %Call for the method of primal affine scaling and return the x coords
 x = PrimalAffineScaling(A,b,c);
 fprintf('Coordinates of x: \n');
-disp(x);
+
+%disp(x);
 
 %comparison linprog
 options = optimoptions('linprog','Display','none');

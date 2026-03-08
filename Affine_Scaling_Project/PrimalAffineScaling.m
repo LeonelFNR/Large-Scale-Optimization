@@ -14,8 +14,7 @@ b = b(ind);
 
 
 
-%M = 1e6 * max(1, norm(c, inf)); % arbitrary neihter big neither small value for big M algorithm
-M = 1000;
+M = 1e6 * max(1, norm(c, inf)); % arbitrary neihter big neither small value for big M algorithm
 eps_components = -1e-12; % tolerance for delta X components
 n = size(A,2);
 
@@ -87,6 +86,7 @@ fprintf('Objective value (extended problem): %.10f\n', obj_value);
 % else STOP and the optimal solution is the found x, return it
 if abs(x(end)) > eps
     fprintf('Status: INFEASIBLE\n');
+    fprintf('%d', x(end));
 else
     x = x(1:end-1);  % remove artificial variable
     fprintf('Status: OPTIMAL\n');
