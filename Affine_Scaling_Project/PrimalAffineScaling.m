@@ -1,8 +1,14 @@
-function x = PrimalAffineScaling(A,b,c)
+function x = PrimalAffineScaling(A,b,c, scaling)
 %PRIMALAFFINESCALING : Takes as input the constraint matrix A that has n
 %columns
 %the independent term vector b and
 %the; cost vector c and applies the PrimalAffineScaling algorithm
+%scaling is a boolean. it's default value is true. if false it means no
+%scaling
+
+if nargin < 4
+    scaling = true;
+end
 
 %work on A so that we only work with full row rank matrix
 [Q,R,E] = qr(A',0);          % QR sobre A'
@@ -11,7 +17,6 @@ r = sum(abs(diag(R)) > tol);
 ind = sort(E(1:r));          % filas independientes de A
 A = A(ind,:);
 b = b(ind);
-
 
 
 M = 1e6 * max(1, norm(c, inf)); % arbitrary neihter big neither small value for big M algorithm
@@ -67,10 +72,12 @@ while abs(c'*x-b'*y) / (1+abs(c'*x)) > eps
     % Update k
     k = k + 1;
 
-    % Compute X^k: X^k = diag(x_1^k, ..., x_n^k) and
-    %Compute D = (X^k)^2 in one step
-    D = diag(x.^2);
-
+    if scaling == true
+        % Compute X^k: X^k = diag(x_1^k, ..., x_n^k) and
+        %Compute D = (X^k)^2 in one step
+        D = diag(x.^2);
+    end
+    
     % y for the next iteration
     y = (A * D * A') \ (A * D * c);
     

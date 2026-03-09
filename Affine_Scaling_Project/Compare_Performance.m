@@ -1,10 +1,17 @@
-function Compare_Performance(A,b,c)
+function Compare_Performance(A,b,c, scaling)
 %COMPARE_PERFORMANCE Summary of this function goes here
 % Takes as input the constraint matrix A that has n
 %columns
 %the independent term vector b and
 %the; cost vector c and applies the PrimalAffineScaling algorithm
 % Compares solutions and results between primal affine scaling and lineprog
+%scaling also tells the algorithm to use the identity matrix or scale it
+%with coordinates
+
+if nargin < 4
+    scaling = true;
+end
+
 
 fprintf('\n===== Problem characteristics =====\n');
 fprintf('Number of variables: %d\n', size(A,2));
@@ -12,7 +19,7 @@ fprintf('Number of constraints: %d\n', size(A,1));
 fprintf('Number of nonzeros in A: %d\n', nnz(A));
 
 %Call for the method of primal affine scaling and return the x coords
-x = PrimalAffineScaling(A,b,c);
+x = PrimalAffineScaling(A,b,c, scaling);
 fprintf('Coordinates of x: \n');
 
 %disp(x);
