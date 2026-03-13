@@ -31,6 +31,8 @@ r = b - A*en;
 A = [A r];
 n = n+1;
 
+% for having information
+[m_ext,n_ext] = size(A);
 
 %extend cost vector
 c = [c' M]';
@@ -61,7 +63,7 @@ while abs(c'*x-b'*y) / (1+abs(c'*x)) > eps
     end
 
     %compute alfa
-    negIdx = dx < 0;                 % indices where dx_i < 0
+    negIdx = dx < 0;                 % índices donde dx_i < 0
     alpha = rho * min(-x(negIdx) ./ dx(negIdx));
 
     % compute x_k+1 = x_k + alpha*dx
@@ -80,10 +82,9 @@ while abs(c'*x-b'*y) / (1+abs(c'*x)) > eps
     lhs = A * D * A';
     rhs = A * D * c;
 
-    % add small diagonal element to lhs to avoid close to singularity
-    lhs = lhs + 1e-10 * eye(size(lhs)); % Add small diagonal to lhs for stability
+    if lhs < 1e-14 %vcl
 
-    y = lhs \ rhs;
+    y = (A * D * A') \ (A * D * c);
     
 end
 
