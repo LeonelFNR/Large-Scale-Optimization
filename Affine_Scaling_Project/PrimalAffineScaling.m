@@ -48,12 +48,6 @@ x = ones(n,1);
 %set D = I, y = (ADA')^(-1)ADc
 D = eye(n); % Initialize D as the identity matrix
 
-% lhs = A * D * A';
-% rhs = A * D * c;
-% y = lhs \ rhs;
-y = (A * D * A') \ (A * D * c); % Compute y using the formula
-
-
 while abs(c'*x-b'*y) / (1+abs(c'*x)) > eps
 
     %compute z = c - A'*y
