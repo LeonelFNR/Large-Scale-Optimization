@@ -10,6 +10,13 @@ if nargin < 4
     scaling = true;
 end
 
+% set k = 0, eps = 10^(-6) and rho in [0.95, 0.9995]
+k = 0;
+eps = 1e-8;
+rho = 0.95;
+obj_unbounded_tol = 1e24;
+% tol_result = 1e-11;
+
 %work on A so that we only work with full row rank matrix
 [Q,R,E] = qr(A',0);          % QR sobre A'
 tol = 1e-12;
@@ -20,7 +27,6 @@ b = b(ind);
 
 
 M = 1e6 * max(1, norm(c, inf)); % arbitrary neihter big neither small value for big M algorithm
-eps_components = -1e-12; % tolerance for delta X components
 n = size(A,2);
 
 % Compute infeasibilities
@@ -38,14 +44,15 @@ c = [c' M]';
 % create x0 as 1...1 (n+1 ones)
 x = ones(n,1);
 
+
 %set D = I, y = (ADA')^(-1)ADc
 D = eye(n); % Initialize D as the identity matrix
+
+% lhs = A * D * A';
+% rhs = A * D * c;
+% y = lhs \ rhs;
 y = (A * D * A') \ (A * D * c); % Compute y using the formula
 
-% set k = 0, eps = 10^(-6) and rho in [0.95, 0.9995]
-k = 0;
-eps = 1e-6;
-rho = 0.95;
 
 while abs(c'*x-b'*y) / (1+abs(c'*x)) > eps
 
@@ -54,7 +61,8 @@ while abs(c'*x-b'*y) / (1+abs(c'*x)) > eps
 
     %compute deltax = -D*z
     dx = -D*z;
-    if all(dx > eps_components)
+    if all(dx >= 0)
+        display(dx);
         % STOP and print that problem is unbounded
         fprintf('The problem is unbounded.\n');
         return;
@@ -75,27 +83,32 @@ while abs(c'*x-b'*y) / (1+abs(c'*x)) > eps
         %Compute D = (X^k)^2 in one step
         D = diag(x.^2);
     end
-    
-    % y for the next iteration
-    lhs = A * D * A';
-    rhs = A * D * c;
 
-    % add small diagonal element to lhs to avoid close to singularity
-    lhs = lhs + 1e-10 * eye(size(lhs)); % Add small diagonal to lhs for stability
-
-    y = lhs \ rhs;
+    y = A * D * A' \ A * D * c;
     
 end
 
 % for printing information later
 obj_value = c'*x;
+
+%if the obj_value is too high (on absolute value), deem the problem as
+%unbounded
+if abs(obj_value) > obj_unbounded_tol
+    fprintf('Status: LIKELY UNBOUNDED\n');
+    fprintf('Heuristic triggered: |c''x| too large.\n');
+    x = NaN(size(x));
+    return;
+end
+
+
 fprintf('\n===== Primal Affine Scaling Results =====\n');
 fprintf('Iterations: %d\n', k);
 fprintf('Objective value (extended problem): %.10f\n', obj_value);
 
-% if last component of x is not ero then STOP INFEASIBLE
+% if last component of x is not zero then STOP INFEASIBLE
 % else STOP and the optimal solution is the found x, return it
-if abs(x(end)) > eps
+%display(x);
+if abs(x(end)) > 1e-12
     fprintf('Status: INFEASIBLE\n');
     fprintf('%d', x(end));
 else

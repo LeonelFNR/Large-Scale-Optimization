@@ -7,6 +7,7 @@ function Compare_Performance(A,b,c, scaling)
 % Compares solutions and results between primal affine scaling and lineprog
 %scaling also tells the algorithm to use the identity matrix or scale it
 %with coordinates
+% into x go the coordinates computed via primal affine scaling
 
 if nargin < 4
     scaling = true;
@@ -20,7 +21,7 @@ fprintf('Number of nonzeros in A: %d\n', nnz(A));
 
 %Call for the method of primal affine scaling and return the x coords
 x = PrimalAffineScaling(A,b,c, scaling);
-fprintf('Coordinates of x: \n');
+
 
 %disp(x);
 
