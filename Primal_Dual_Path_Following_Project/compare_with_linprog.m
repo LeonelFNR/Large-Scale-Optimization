@@ -1,5 +1,8 @@
 function results = compare_with_linprog(A,b,c)
 
+% add to ignore warnings for cleaner output experience
+warning('off', 'all'); % Suppress all warnings
+
 fprintf('\n================= COMPARISON =================\n');
 
 n = length(c);

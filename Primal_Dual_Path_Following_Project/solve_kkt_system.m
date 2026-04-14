@@ -6,13 +6,13 @@ m = length(rb);
 % Theta = X * S^{-1}
 Theta = X / S;
 
-% matriz normal equations
+% normal matrix equations
 M = A * Theta * A';
 
 % RHS
 rhs = -rb + A*(Theta*(-rc) + S\rxs);
 
-% resolver sistema
+% solve system
 dl = M \ rhs;
 
 % recuperar ds y dx

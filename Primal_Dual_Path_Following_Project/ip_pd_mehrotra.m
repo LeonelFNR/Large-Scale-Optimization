@@ -1,7 +1,7 @@
 function [x,lambda,s,history] = ip_pd_mehrotra(A,b,c,info)
 
 if nargin < 4
-    info = 1; % por defecto mostrar logs
+    info = 1; % show logs by default
 end
 
 [m,n] = size(A);
@@ -26,7 +26,7 @@ end
 
 for k = 1:max_iter
     
-    % residuos
+    % residues
     rc = A'*lambda + s - c;
     rb = A*x - b;
     mu = (x'*s)/n;
@@ -34,16 +34,16 @@ for k = 1:max_iter
     f_primal = c'*x;
     f_dual   = b'*lambda;
     
-    % guardar historia
+    % save history
     history = [history; [f_primal, f_dual, norm(rc), norm(rb), mu]];
     
-    % imprimir
+    % print
     if info > 0
         fprintf('%3d  | %10.4e %10.4e %10.2e %10.2e %10.2e\n',...
             k-1,f_primal,f_dual,norm(rc),norm(rb),mu);
     end
     
-    % criterio parada
+    % stopping criteria
     if norm(rc)/(1+norm(c)) < tol && norm(rb)/(1+norm(b)) < tol && mu < tol
         break;
     end
