@@ -1,0 +1,632 @@
+sw: ampl
+ampl: commands trnloc.run;
+
+ITERATION 1
+
+CPLEX 20.1.0.0: netopt 2
+netfind 2
+CPLEX 20.1.0.0: optimal solution; objective 2661907.9
+Network extractor found 32 nodes and 175 arcs.
+39 network simplex iterations.
+0 simplex iterations (0 in phase I)
+
+GAP = 2661910
+
+Ship [*,*]
+:     A3      A6      A8     A9      B2      B4      :=
+17       0       0   8810       0       0       0
+18       0       0   5190   13500       0       0
+19       0       0      0       0   15780       0
+20       0   12000      0       0    9220       0
+22   12000       0      0       0       0       0
+24       0       0      0       0       0   10030
+25       0       0      0       0       0   18970
+;
+
+
+RE-SOLVING MASTER PROBLEM
+
+CPLEX 20.1.0.0: optimal integer solution; objective 2876165
+0 MIP simplex iterations
+0 branch-and-bound nodes
+
+Build [*] :=
+;
+
+
+ITERATION 2
+
+CPLEX 20.1.0.0: netopt 2
+netfind 2
+CPLEX 20.1.0.0: infeasible problem.
+netopt found an infeasible network.
+Network extractor found 32 nodes and 175 arcs.
+25 network simplex iterations.
+30 dual simplex iterations (12 in phase I)
+constraint.dunbdd returned
+27 extra dual simplex iterations for ray
+
+subject to Cut_Defn[2]:  # Dropped.
+	23070*Build[1] + 21090*Build[6] + 22690*Build[11] + 17110*Build[16] + 
+	16720*Build[21] + 18290*Build[2] + 16650*Build[7] + 19360*Build[12] + 
+	15380*Build[17] + 21540*Build[22] + 20010*Build[3] + 18420*Build[8] + 
+	22330*Build[13] + 18690*Build[18] + 16500*Build[23] + 15080*Build[4] + 
+	19160*Build[9] + 15440*Build[14] + 20720*Build[19] + 15310*Build[24] + 
+	17540*Build[5] + 18860*Build[10] + 19330*Build[15] + 21220*Build[20] + 
+	18970*Build[25] >= 105500;
+
+
+RE-SOLVING MASTER PROBLEM
+
+CPLEX 20.1.0.0: optimal integer solution; objective 5188260.8
+3 MIP simplex iterations
+0 branch-and-bound nodes
+
+Build [*] :=
+ 1  1
+11  1
+13  1
+20  1
+25  1
+;
+
+
+ITERATION 3
+
+CPLEX 20.1.0.0: netopt 2
+netfind 2
+CPLEX 20.1.0.0: optimal solution; objective 4397580.4
+Network extractor found 32 nodes and 175 arcs.
+63 network simplex iterations.
+0 simplex iterations (0 in phase I)
+
+GAP = 1709320
+
+Ship [*,*]
+:     A3     A6      A8     A9      B2      B4      :=
+1       0   12000      0       0    8290       0
+11   7490       0   8530       0       0    6670
+13      0       0      0       0       0   22330
+20   4510       0      0       0   16710       0
+25      0       0   5470   13500       0       0
+;
+
+
+RE-SOLVING MASTER PROBLEM
+
+CPLEX 20.1.0.0: optimal integer solution; objective 5624373.2
+7226 MIP simplex iterations
+8282 branch-and-bound nodes
+
+Build [*] :=
+ 6  1
+11  1
+13  1
+18  1
+22  1
+;
+
+
+ITERATION 4
+
+CPLEX 20.1.0.0: netopt 2
+netfind 2
+CPLEX 20.1.0.0: optimal solution; objective 3847883.3
+Network extractor found 32 nodes and 175 arcs.
+52 network simplex iterations.
+0 simplex iterations (0 in phase I)
+
+GAP = 723510
+
+Ship [*,*]
+:     A3      A6      A8      A9     B2      B4      :=
+6        0       0       0   8810       0   11440
+11       0   12000       0      0   10690       0
+13       0       0       0      0    4770   17560
+18       0       0   14000   4690       0       0
+22   12000       0       0      0    9540       0
+;
+
+
+RE-SOLVING MASTER PROBLEM
+
+CPLEX 20.1.0.0: optimal integer solution; objective 5661907.9
+214 MIP simplex iterations
+103 branch-and-bound nodes
+
+Build [*] :=
+ 9  1
+18  1
+19  1
+20  1
+22  1
+25  1
+;
+
+
+ITERATION 5
+
+CPLEX 20.1.0.0: netopt 2
+netfind 2
+CPLEX 20.1.0.0: optimal solution; objective 2818044.7
+Network extractor found 32 nodes and 175 arcs.
+40 network simplex iterations.
+0 simplex iterations (0 in phase I)
+
+GAP = 156137
+
+Ship [*,*]
+:     A3      A6      A8     A9      B2      B4      :=
+9        0       0   9300       0       0       0
+18       0       0   4700   13500       0     490
+19       0       0      0       0   15780       0
+20       0   12000      0       0    9220       0
+22   12000       0      0       0       0    9540
+25       0       0      0       0       0   18970
+;
+
+
+RE-SOLVING MASTER PROBLEM
+
+CPLEX 20.1.0.0: optimal integer solution; objective 5661907.9
+52 MIP simplex iterations
+0 branch-and-bound nodes
+
+Build [*] :=
+16  1
+18  1
+19  1
+20  1
+22  1
+25  1
+;
+
+
+ITERATION 6
+
+CPLEX 20.1.0.0: netopt 2
+netfind 2
+CPLEX 20.1.0.0: optimal solution; objective 2757807.5
+Network extractor found 32 nodes and 175 arcs.
+33 network simplex iterations.
+0 simplex iterations (0 in phase I)
+
+GAP = 95899.6
+
+Ship [*,*]
+:     A3      A6      A8     A9      B2      B4      :=
+16       0       0   8810       0       0    8300
+18       0       0   5190   13500       0       0
+19       0       0      0       0   15780       0
+20       0   12000      0       0    9220       0
+22   12000       0      0       0       0    1730
+25       0       0      0       0       0   18970
+;
+
+
+RE-SOLVING MASTER PROBLEM
+
+CPLEX 20.1.0.0: optimal integer solution within mipgap or absmipgap; objective 5661907.9
+63 MIP simplex iterations
+0 branch-and-bound nodes
+absmipgap = 293.843, relmipgap = 5.18982e-05
+
+Build [*] :=
+ 9  1
+16  1
+18  1
+20  1
+22  1
+25  1
+;
+
+
+ITERATION 7
+
+CPLEX 20.1.0.0: netopt 2
+netfind 2
+CPLEX 20.1.0.0: optimal solution; objective 2892428.2
+Network extractor found 32 nodes and 175 arcs.
+39 network simplex iterations.
+0 simplex iterations (0 in phase I)
+
+GAP = 95899.6
+
+Ship [*,*]
+:     A3     A6      A8     A9      B2      B4      :=
+9       0       0   8810       0       0       0
+16   6240       0      0       0       0   10030
+18      0       0   5190   13500       0       0
+20      0   12000      0       0    9220       0
+22   5760       0      0       0   15780       0
+25      0       0      0       0       0   18970
+;
+
+
+RE-SOLVING MASTER PROBLEM
+
+CPLEX 20.1.0.0: optimal integer solution; objective 5661907.9
+71 MIP simplex iterations
+0 branch-and-bound nodes
+
+Build [*] :=
+ 9  1
+18  1
+19  1
+20  1
+24  1
+25  1
+;
+
+
+ITERATION 8
+
+CPLEX 20.1.0.0: netopt 2
+netfind 2
+CPLEX 20.1.0.0: optimal solution; objective 2811044.9
+Network extractor found 32 nodes and 175 arcs.
+41 network simplex iterations.
+0 simplex iterations (0 in phase I)
+
+GAP = 95899.6
+
+Ship [*,*]
+:     A3      A6      A8      A9      B2      B4      :=
+9        0       0   14000       0       0    1530
+18       0       0       0   13500       0    5190
+19       0       0       0       0   15780       0
+20       0   12000       0       0    9220       0
+24   12000       0       0       0       0    3310
+25       0       0       0       0       0   18970
+;
+
+
+RE-SOLVING MASTER PROBLEM
+
+CPLEX 20.1.0.0: optimal integer solution; objective 5661907.9
+48 MIP simplex iterations
+0 branch-and-bound nodes
+
+Build [*] :=
+18  1
+19  1
+20  1
+23  1
+24  1
+25  1
+;
+
+
+ITERATION 9
+
+CPLEX 20.1.0.0: netopt 2
+netfind 2
+CPLEX 20.1.0.0: optimal solution; objective 2797545.3
+Network extractor found 32 nodes and 175 arcs.
+40 network simplex iterations.
+0 simplex iterations (0 in phase I)
+
+GAP = 95899.6
+
+Ship [*,*]
+:     A3      A6      A8     A9      B2      B4      :=
+18       0       0   5190   13500       0       0
+19       0       0      0       0   15780       0
+20       0   12000      0       0    9220       0
+23   12000       0      0       0       0    3530
+24       0       0      0       0       0   15310
+25       0       0   8810       0       0   10160
+;
+
+
+RE-SOLVING MASTER PROBLEM
+
+CPLEX 20.1.0.0: optimal integer solution; objective 5661907.9
+49 MIP simplex iterations
+0 branch-and-bound nodes
+
+Build [*] :=
+16  1
+18  1
+19  1
+20  1
+24  1
+25  1
+;
+
+
+ITERATION 10
+
+CPLEX 20.1.0.0: netopt 2
+netfind 2
+CPLEX 20.1.0.0: optimal solution; objective 2745154.1
+Network extractor found 32 nodes and 175 arcs.
+32 network simplex iterations.
+0 simplex iterations (0 in phase I)
+
+GAP = 83246.2
+
+Ship [*,*]
+:     A3      A6      A8     A9      B2      B4      :=
+16       0       0   8810       0       0    6720
+18       0       0   5190   13500       0       0
+19       0       0      0       0   15780       0
+20       0   12000      0       0    9220       0
+24   12000       0      0       0       0    3310
+25       0       0      0       0       0   18970
+;
+
+
+RE-SOLVING MASTER PROBLEM
+
+CPLEX 20.1.0.0: optimal integer solution within mipgap or absmipgap; objective 5661907.9
+51 MIP simplex iterations
+0 branch-and-bound nodes
+absmipgap = 277.887, relmipgap = 4.908e-05
+
+Build [*] :=
+17  1
+18  1
+20  1
+22  1
+24  1
+25  1
+;
+
+
+ITERATION 11
+
+CPLEX 20.1.0.0: netopt 2
+netfind 2
+CPLEX 20.1.0.0: optimal solution; objective 2735206.9
+Network extractor found 32 nodes and 175 arcs.
+45 network simplex iterations.
+0 simplex iterations (0 in phase I)
+
+GAP = 73299
+
+Ship [*,*]
+:     A3     A6      A8     A9      B2      B4      :=
+17      0       0   8810       0       0     960
+18      0       0   5190   13500       0       0
+20      0   12000      0       0    9220       0
+22   5760       0      0       0   15780       0
+24   6240       0      0       0       0    9070
+25      0       0      0       0       0   18970
+;
+
+
+RE-SOLVING MASTER PROBLEM
+
+CPLEX 20.1.0.0: optimal integer solution; objective 5667218.1
+56 MIP simplex iterations
+0 branch-and-bound nodes
+
+Build [*] :=
+16  1
+18  1
+20  1
+22  1
+24  1
+25  1
+;
+
+
+ITERATION 12
+
+CPLEX 20.1.0.0: netopt 2
+netfind 2
+CPLEX 20.1.0.0: optimal solution; objective 2766209.9
+Network extractor found 32 nodes and 175 arcs.
+47 network simplex iterations.
+0 simplex iterations (0 in phase I)
+
+GAP = 73299
+
+Ship [*,*]
+:     A3     A6      A8     A9      B2      B4      :=
+16      0       0   8810       0       0     960
+18      0       0   5190   13500       0       0
+20      0   12000      0       0    9220       0
+22   5760       0      0       0   15780       0
+24   6240       0      0       0       0    9070
+25      0       0      0       0       0   18970
+;
+
+
+RE-SOLVING MASTER PROBLEM
+
+CPLEX 20.1.0.0: optimal integer solution; objective 5683941.7
+51 MIP simplex iterations
+0 branch-and-bound nodes
+
+Build [*] :=
+17  1
+18  1
+19  1
+20  1
+24  1
+25  1
+;
+
+
+ITERATION 13
+
+CPLEX 20.1.0.0: netopt 2
+netfind 2
+CPLEX 20.1.0.0: optimal solution; objective 2740440.4
+Network extractor found 32 nodes and 175 arcs.
+42 network simplex iterations.
+0 simplex iterations (0 in phase I)
+
+GAP = 56498.7
+
+Ship [*,*]
+:     A3      A6      A8     A9      B2      B4      :=
+17       0       0   8810       0       0    6570
+18       0       0   5190   13500       0       0
+19       0       0      0       0   15930       0
+20     150   12000      0       0    9070       0
+24   11850       0      0       0       0    3460
+25       0       0      0       0       0   18970
+;
+
+
+RE-SOLVING MASTER PROBLEM
+
+CPLEX 20.1.0.0: optimal integer solution; objective 5726687.5
+50 MIP simplex iterations
+0 branch-and-bound nodes
+
+Build [*] :=
+10  1
+17  1
+18  1
+20  1
+22  1
+25  1
+;
+
+
+ITERATION 14
+
+CPLEX 20.1.0.0: netopt 2
+netfind 2
+CPLEX 20.1.0.0: optimal solution; objective 2838979.5
+Network extractor found 32 nodes and 175 arcs.
+42 network simplex iterations.
+0 simplex iterations (0 in phase I)
+
+GAP = 56498.7
+
+Ship [*,*]
+:     A3      A6      A8     A9      B2     B4      :=
+10       0       0      0       0   9700       0
+17       0       0   8810       0      0    6570
+18       0       0   5190   13500      0       0
+20       0   12000      0       0   9220       0
+22   12000       0      0       0   6080    3460
+25       0       0      0       0      0   18970
+;
+
+
+RE-SOLVING MASTER PROBLEM
+
+CPLEX 20.1.0.0: optimal integer solution; objective 5726687.5
+57 MIP simplex iterations
+0 branch-and-bound nodes
+
+Build [*] :=
+17  1
+18  1
+19  1
+20  1
+22  1
+25  1
+;
+
+
+ITERATION 15
+
+CPLEX 20.1.0.0: netopt 2
+netfind 2
+CPLEX 20.1.0.0: optimal solution; objective 2764530.5
+Network extractor found 32 nodes and 175 arcs.
+38 network simplex iterations.
+0 simplex iterations (0 in phase I)
+
+GAP = 37843
+
+Ship [*,*]
+:     A3      A6      A8     A9      B2      B4      :=
+17       0       0   8810       0       0    6570
+18       0       0   5190   13500       0       0
+19       0       0      0       0   15780       0
+20       0   12000      0       0    9220       0
+22   12000       0      0       0       0    3460
+25       0       0      0       0       0   18970
+;
+
+
+RE-SOLVING MASTER PROBLEM
+
+CPLEX 20.1.0.0: optimal integer solution; objective 5734216.7
+56 MIP simplex iterations
+0 branch-and-bound nodes
+
+Build [*] :=
+17  1
+18  1
+19  1
+20  1
+23  1
+25  1
+;
+
+
+ITERATION 16
+
+CPLEX 20.1.0.0: netopt 2
+netfind 2
+CPLEX 20.1.0.0: optimal solution; objective 2755659.9
+Network extractor found 32 nodes and 175 arcs.
+31 network simplex iterations.
+0 simplex iterations (0 in phase I)
+
+GAP = 21443.2
+
+Ship [*,*]
+:     A3      A6      A8     A9      B2      B4      :=
+17       0       0   8810       0       0    5530
+18       0       0   5190   13500       0       0
+19       0       0      0       0   15780       0
+20       0   12000      0       0    9220       0
+23   12000       0      0       0       0    4500
+25       0       0      0       0       0   18970
+;
+
+
+RE-SOLVING MASTER PROBLEM
+
+CPLEX 20.1.0.0: optimal integer solution; objective 5735206.9
+56 MIP simplex iterations
+0 branch-and-bound nodes
+
+Build [*] :=
+17  1
+18  1
+20  1
+22  1
+24  1
+25  1
+;
+
+
+ITERATION 17
+
+CPLEX 20.1.0.0: netopt 2
+netfind 2
+CPLEX 20.1.0.0: optimal solution; objective 2735206.9
+Network extractor found 32 nodes and 175 arcs.
+45 network simplex iterations.
+0 simplex iterations (0 in phase I)
+
+Ship [*,*]
+:     A3     A6      A8     A9      B2      B4      :=
+17      0       0   8810       0       0     960
+18      0       0   5190   13500       0       0
+20      0   12000      0       0    9220       0
+22   5760       0      0       0   15780       0
+24   6240       0      0       0       0    9070
+25      0       0      0       0       0   18970
+;
+
+ampl: display cut_type;
+cut_type [*] :=
+ 1 point    4 point    7 point   10 point   13 point   16 point
+ 2 ray      5 point    8 point   11 point   14 point
+ 3 point    6 point    9 point   12 point   15 point
+;
+
+ampl: display nCUT;
+nCUT = 16

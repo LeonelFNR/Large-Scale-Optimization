@@ -1,0 +1,65 @@
+reset;
+model network_design_benders.mod;
+data network_design.dat;
+
+option solver cplex;
+option presolve 0;
+option display_eps 1e-6;
+option omit_zero_rows 1;
+
+problem SUBPR: x, Sub_Exploit_Cost, CapSub;
+problem MASTER: y, zmp, Master_Obj, Bcut;
+
+let nCUT := 0;
+let {(i,j) in Ahat} yb[i,j] := 0;
+
+param inv_yb;
+param zd_total;
+param gap;
+param it integer;
+
+printf "\nBENDERS: inicio y=0\n";
+printf "iter; master_z; sub_total; investment; exploitation; gap\n";
+
+for {it in 1..Niter} {
+    solve SUBPR;
+
+    if SUBPR.result != "solved" then {
+        printf "Subproblema no resuelto: %s\n", SUBPR.result;
+        break;
+    }
+
+    let inv_yb := sum {(i,j) in Ahat} f[i,j]*yb[i,j];
+    let zd_total := inv_yb + Sub_Exploit_Cost;
+
+    # Añadir corte de optimalidad.
+    let nCUT := nCUT + 1;
+    let cut_const[nCUT] := sum {l in O, i in N} t[i,l]*I[i,l].dual;
+
+    # tauMinus = max(0, u_i - u_j - c_ij) si yb_ij=0; 0 si yb_ij=1.
+    let {(i,j) in Ahat, l in O} tauMinus[i,j,l,nCUT] :=
+        if yb[i,j] < 0.5 then max(0, I[i,l].dual - I[j,l].dual - c[i,j,l]) else 0;
+
+    solve MASTER;
+
+    let gap := zd_total - Master_Obj;
+    printf "%d; %.6f; %.6f; %.6f; %.6f; %.6f\n", it, Master_Obj, zd_total, inv_yb, Sub_Exploit_Cost, gap;
+
+    if gap <= eps * max(1, abs(Master_Obj)) then {
+        printf "STOP: corte no violado dentro de tolerancia.\n";
+        break;
+    }
+
+    let {(i,j) in Ahat} yb[i,j] := round(y[i,j]);
+}
+
+printf "\nSolución Benders y=0 inicial\n";
+display Master_Obj;
+display {(i,j) in Ahat: y[i,j] > 0.5} y[i,j];
+
+delete CapSub;
+subject to CapFinal {(i,j) in Ahat, l in O}:
+    x[i,j,l] <= rho*round(y[i,j]);
+problem FINALSUB: x, Sub_Exploit_Cost, CapFinal;
+solve FINALSUB;
+display {l in O, (i,j) in AA: x[i,j,l] > 1e-6} x[i,j,l];

@@ -1,0 +1,19 @@
+reset;
+model network_design_original.mod;
+data network_design.dat;
+
+option solver cplex;
+option display_eps 1e-6;
+option omit_zero_rows 1;
+
+problem Original: y, x, Total_Cost, CapCand;
+solve Original;
+
+param inv_cost;
+param exp_cost;
+let inv_cost := sum {(i,j) in Ahat} f[i,j]*y[i,j];
+let exp_cost := sum {l in O, (i,j) in AA} c[i,j,l]*x[i,j,l];
+
+display Total_Cost, inv_cost, exp_cost;
+display {(i,j) in Ahat: y[i,j] > 0.5} y[i,j];
+display {l in O, (i,j) in AA: x[i,j,l] > 1e-6} x[i,j,l];
