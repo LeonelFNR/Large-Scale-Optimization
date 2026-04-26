@@ -24,15 +24,17 @@ param invest;
 param exploit;
 param sub_total;
 param gap default Infinity;
-param it integer;
+#param it integer;
 
 printf "\nBENDERS DECOMPOSITION - INITIAL y=0\n";
 printf "iter; master_z; sub_total; investment; exploitation; gap\n";
 
 for {it in 1..Niter} {
 
-    # RESOLVE SUBPROBLEM
     solve SUBPR;
+    
+    #display zd;
+	#display sum {l in O, i in N} t[i,l] * I[i,l].dual;
 
     if SUBPR.result != "solved" then {
         printf "STOP: subproblem status = %s\n", SUBPR.result;
@@ -43,26 +45,23 @@ for {it in 1..Niter} {
     let exploit := zd;
     let sub_total := invest + exploit;
 
-    # Add one Benders optimality cut
     let nCUT := nCUT + 1;
 
-    # Store the current master point
     let {(i,j) in Ahat} ybk[i,j,nCUT] := yb[i,j];
 
-    # u[i,l,k] is the dual multiplier of the flow-balance node I[i,l]
-    let {i in N, l in O} u[i,l,nCUT] := I[i,l].dual;
+    let {i in N, l in O}
+        u[i,l,nCUT] := - I[i,l].dual;
 
-    # restric is tauMinus. It is computed from the node potentials u.
     let {(i,j) in Ahat, l in O} restric[i,j,l,nCUT] :=
         if yb[i,j] < 0.5 then
             max(0, u[i,l,nCUT] - u[j,l,nCUT] - c[i,j,l])
         else
             0;
 
-    # RESOLVE MASTER PROBLEM
     solve MasterP3;
 
     let gap := sub_total - ZMP3;
+
     printf "%d; %.6f; %.6f; %.6f; %.6f; %.6f\n",
         it, ZMP3, sub_total, invest, exploit, gap;
 

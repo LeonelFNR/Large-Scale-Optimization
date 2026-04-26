@@ -1,19 +1,43 @@
+# ------------------------------------------------------------
+# DIRECT SOLUTION WITHOUT BENDERS
+# ------------------------------------------------------------
+
 reset;
-model network_design_original.mod;
+
+model network_design_benders_like_example.mod;
 data network_design.dat;
 
 option solver cplex;
+option presolve 0;
 option display_eps 1e-6;
 option omit_zero_rows 1;
+option display_1col 20;
 
-problem Original: y, x, Total_Cost, CapCand;
-solve Original;
+# Original full MILP problem
+problem ORIGINAL: xl, y, I, caps1, z;
 
-param inv_cost;
-param exp_cost;
-let inv_cost := sum {(i,j) in Ahat} f[i,j]*y[i,j];
-let exp_cost := sum {l in O, (i,j) in AA} c[i,j,l]*x[i,j,l];
+printf "\nDIRECT SOLUTION WITHOUT BENDERS\n\n";
 
-display Total_Cost, inv_cost, exp_cost;
+solve ORIGINAL;
+
+printf "\nOBJECTIVE VALUE DECOMPOSITION\n";
+
+printf "Total objective value: %.6f\n", z;
+
+printf "Investment cost f^T y: %.6f\n",
+    sum {(i,j) in Ahat} f[i,j] * y[i,j];
+
+printf "Exploitation cost sum_l c_l^T x_l: %.6f\n",
+    sum {l in O, (i,j) in AA} c[i,j,l] * xl[i,j,l];
+
+printf "\nCANDIDATE LINKS INCLUDED IN THE SOLUTION y[a] = 1\n";
+
 display {(i,j) in Ahat: y[i,j] > 0.5} y[i,j];
-display {l in O, (i,j) in AA: x[i,j,l] > 1e-6} x[i,j,l];
+
+printf "\nCANDIDATE LINKS NOT INCLUDED IN THE SOLUTION y[a] = 0\n";
+
+display {(i,j) in Ahat: y[i,j] < 0.5} y[i,j];
+
+printf "\nNONZERO FLOWS IN THE FINAL NETWORK\n";
+
+display {l in O, (i,j) in AA: xl[i,j,l] > 1e-6} xl[i,j,l];

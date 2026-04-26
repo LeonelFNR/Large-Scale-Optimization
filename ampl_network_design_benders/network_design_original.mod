@@ -6,7 +6,7 @@ set AA := A union Ahat; #todos los arcos
 
 param xc {N};
 param yc {N};
-param t {N,O} default 0;
+param t {N,O};
 param rho > 0;
 
 # Coste de explotación. Si tu enunciado usa 100*(dx)^2 en vez de 100+(dx)^2,
