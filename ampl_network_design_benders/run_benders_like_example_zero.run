@@ -83,3 +83,19 @@ let {(i,j) in Ahat} yb[i,j] := round(y[i,j]);
 solve SUBPR;
 display zd;
 display {l in O, (i,j) in AA: xl[i,j,l] > 1e-6} xl[i,j,l];
+
+printf "\nFINAL INCLUDED CANDIDATE LINKS y[a] = 1\n";
+display {(i,j) in Ahat: y[i,j] > 0.5} y[i,j];
+
+printf "\nFINAL EXCLUDED CANDIDATE LINKS y[a] = 0\n";
+display {(i,j) in Ahat: y[i,j] < 0.5} y[i,j];
+
+printf "\nFINAL COST DECOMPOSITION\n";
+
+printf "Investment cost: %.6f\n",
+    sum {(i,j) in Ahat} f[i,j]*round(y[i,j]);
+
+printf "Exploitation cost: %.6f\n", zd;
+
+printf "Total cost: %.6f\n",
+    sum {(i,j) in Ahat} f[i,j]*round(y[i,j]) + zd;
