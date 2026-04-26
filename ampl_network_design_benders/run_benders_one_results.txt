@@ -1,0 +1,180 @@
+ampl: include run_benders_one.run;
+
+BENDERS DECOMPOSITION - INITIAL y=1
+iter; master_z; sub_total; investment; exploitation; gap
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 826560
+37 simplex iterations
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 826560
+0 simplex iterations
+1; 826560.000000; 826770.000000; 210.000000; 826560.000000; 210.000000
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 948840
+13 simplex iterations
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 826570
+0 simplex iterations
+2; 826570.000000; 948840.000000; 0.000000; 948840.000000; 122270.000000
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 907800
+2 simplex iterations
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 826570
+0 simplex iterations
+3; 826570.000000; 907810.000000; 10.000000; 907800.000000; 81240.000000
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 926760
+7 simplex iterations
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution within tolerance; objective 826580
+3 simplex iterations
+absmipgap=1.5395, relmipgap=1.86249e-06
+4; 826580.000000; 926770.000000; 10.000000; 926760.000000; 100190.000000
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 885120
+2 simplex iterations
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 826580
+0 simplex iterations
+5; 826580.000000; 885140.000000; 20.000000; 885120.000000; 58560.000000
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 923520
+7 simplex iterations
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution within tolerance; objective 826590
+9 simplex iterations
+absmipgap=0.00889055, relmipgap=1.07557e-08
+6; 826590.000000; 923540.000000; 20.000000; 923520.000000; 96950.000000
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 907200
+1 simplex iterations
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution within tolerance; objective 826590
+5 simplex iterations
+absmipgap=0.00813089, relmipgap=9.83667e-09
+7; 826590.000000; 907230.000000; 30.000000; 907200.000000; 80640.000000
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 901440
+6 simplex iterations
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution within tolerance; objective 826600
+5 simplex iterations
+absmipgap=0.0145519, relmipgap=1.76046e-08
+8; 826600.000000; 901470.000000; 30.000000; 901440.000000; 74870.000000
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 885120
+1 simplex iterations
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 826600
+0 simplex iterations
+9; 826600.000000; 885160.000000; 40.000000; 885120.000000; 58560.000000
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 891720
+16 simplex iterations
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 826610
+6 simplex iterations
+10; 826610.000000; 891760.000000; 40.000000; 891720.000000; 65150.000000
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 850080
+2 simplex iterations
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 826610
+5 simplex iterations
+11; 826610.000000; 850130.000000; 50.000000; 850080.000000; 23520.000000
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 869640
+7 simplex iterations
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 826610
+12 simplex iterations
+12; 826610.000000; 869690.000000; 50.000000; 869640.000000; 43080.000000
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 891720
+5 simplex iterations
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution within tolerance; objective 826620
+13 simplex iterations
+absmipgap=0.00849618, relmipgap=1.02782e-08
+13; 826620.000000; 891770.000000; 50.000000; 891720.000000; 65150.000000
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 828000
+7 simplex iterations
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution within tolerance; objective 826620
+11 simplex iterations
+absmipgap=0.178295, relmipgap=2.15691e-07
+14; 826620.000000; 828060.000000; 60.000000; 828000.000000; 1440.000000
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 866400
+7 simplex iterations
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 826630
+16 simplex iterations
+15; 826630.000000; 866460.000000; 60.000000; 866400.000000; 39830.000000
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 850080
+1 simplex iterations
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution within tolerance; objective 826630
+10 simplex iterations
+absmipgap=0.363667, relmipgap=4.39939e-07
+16; 826630.000000; 850150.000000; 70.000000; 850080.000000; 23520.000000
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 844320
+6 simplex iterations
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution within tolerance; objective 826640
+5 simplex iterations
+absmipgap=0.671141, relmipgap=8.1189e-07
+17; 826640.000000; 844390.000000; 70.000000; 844320.000000; 17750.000000
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 826560
+2 simplex iterations
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution within tolerance; objective 826640
+0 simplex iterations
+absmipgap=20, relmipgap=2.41943e-05
+18; 826640.000000; 826640.000000; 80.000000; 826560.000000; 0.000000
+STOP: Benders cut not violated within tolerance.
+
+FINAL SOLUTION FROM BENDERS, INITIAL y=1
+ZMP3 = 826640
+
+y[i,j] :=
+4  5    1
+6  14   1
+11 22   1
+14 13   1
+;
+
+y[i,j] :=
+;
+
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 826560
+0 simplex iterations
+zd = 826560
+
+xl[i,j,l] [3,*,*] (tr)
+:     1     2     3     4     6     7     9    13    14    18    19    24    :=
+1     .    120    .     .     .     .     .     .     .     .     .     .
+2     .     .    120    .     .     .     .     .     .     .     .     .
+4    120    .     .     .     .     .     .     .     .     .     .     .
+5     .     .     .     .    120    .     .     .     .     .     .     .
+6     .     .    840    .     .     .     .     .     .     .     .     .
+7     .     .    240    .     .     .     .     .     .     .     .     .
+8     .     .     .     .     .     .    120    .     .     .     .     .
+9     .     .     .    120    .     .     .     .     .     .     .     .
+12    .     .     .     .     .     .     .    120    .     .     .     .
+13    .     .     .     .     .     .     .     .    360    .     .     .
+14    .     .     .     .    720    .     .     .     .     .     .     .
+17    .     .     .     .     .     .     .    120    .     .     .     .
+18    .     .     .     .     .     .     .     .    240    .     .     .
+19    .     .     .     .     .    240    .     .     .     .     .     .
+21    .     .     .     .     .     .     .     .     .    120    .     .
+23    .     .     .     .     .     .     .     .     .     .     .    120
+24    .     .     .     .     .     .     .     .     .     .    120    .
+
+ [11,*,*] (tr)
+:     4     7     8     9    11    12    13    14    20    22     :=
+4     .     .     .    120    .     .     .     .     .     .
+5    120    .     .     .     .     .     .     .     .     .
+7     .     .     .     .     .     .     .    120    .     .
+8     .     .     .     .    240    .     .     .     .     .
+9     .     .    120    .     .     .     .     .     .     .
+12    .     .     .     .    720    .     .     .     .     .
+13    .     .     .     .     .    600    .     .     .     .
+14    .     .     .     .     .     .    360    .     .     .
+17    .     .     .     .     .     .    120    .     .     .
+18    .     .     .     .     .     .     .    120    .     .
+19    .    120    .     .     .     .     .     .     .     .
+20    .     .     .     .     .     .     .     .     .    120
+21    .     .     .     .     .     .     .     .    120    .
+22    .     .     .     .    240    .     .     .     .     .
+23    .     .     .     .     .     .     .     .     .    120
+;
+
+
+FINAL INCLUDED CANDIDATE LINKS y[a] = 1
+y[i,j] :=
+4  5    1
+6  14   1
+11 22   1
+14 13   1
+;
+
+
+FINAL EXCLUDED CANDIDATE LINKS y[a] = 0
+y[i,j] :=
+;
+
+
+FINAL COST DECOMPOSITION
+Investment cost: 80.000000
+Exploitation cost: 826560.000000
+Total cost: 826640.000000

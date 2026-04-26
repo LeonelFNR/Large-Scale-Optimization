@@ -4,7 +4,7 @@
 
 reset;
 
-model network_design_benders_like_example.mod;
+model network_design_benders.mod;
 data network_design.dat;
 
 option solver cplex;

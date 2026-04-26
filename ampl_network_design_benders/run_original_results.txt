@@ -1,0 +1,65 @@
+ampl: include run_original.run;
+
+DIRECT SOLUTION WITHOUT BENDERS
+
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution within tolerance; objective 826640
+41 simplex iterations
+absmipgap=68.48, relmipgap=8.28414e-05
+
+OBJECTIVE VALUE DECOMPOSITION
+Total objective value: 826640.000000
+Investment cost f^T y: 80.000000
+Exploitation cost sum_l c_l^T x_l: 826560.000000
+
+CANDIDATE LINKS INCLUDED IN THE SOLUTION y[a] = 1
+y[i,j] :=
+4  5    1
+6  14   1
+11 22   1
+14 13   1
+;
+
+
+CANDIDATE LINKS NOT INCLUDED IN THE SOLUTION y[a] = 0
+y[i,j] :=
+;
+
+
+NONZERO FLOWS IN THE FINAL NETWORK
+xl[i,j,l] [3,*,*] (tr)
+:     1     2     3     4     6     7     9    13    14    18    19    24    :=
+1     .    120    .     .     .     .     .     .     .     .     .     .
+2     .     .    120    .     .     .     .     .     .     .     .     .
+4    120    .     .     .     .     .     .     .     .     .     .     .
+5     .     .     .     .    120    .     .     .     .     .     .     .
+6     .     .    840    .     .     .     .     .     .     .     .     .
+7     .     .    240    .     .     .     .     .     .     .     .     .
+8     .     .     .     .     .     .    120    .     .     .     .     .
+9     .     .     .    120    .     .     .     .     .     .     .     .
+12    .     .     .     .     .     .     .    120    .     .     .     .
+13    .     .     .     .     .     .     .     .    360    .     .     .
+14    .     .     .     .    720    .     .     .     .     .     .     .
+17    .     .     .     .     .     .     .    120    .     .     .     .
+18    .     .     .     .     .     .     .     .    240    .     .     .
+19    .     .     .     .     .    240    .     .     .     .     .     .
+21    .     .     .     .     .     .     .     .     .    120    .     .
+23    .     .     .     .     .     .     .     .     .     .     .    120
+24    .     .     .     .     .     .     .     .     .     .    120    .
+
+ [11,*,*] (tr)
+:     4     7     8     9    11    12    13    14    20    22     :=
+4     .     .     .    120    .     .     .     .     .     .
+5    120    .     .     .     .     .     .     .     .     .
+7     .     .     .     .     .     .     .    120    .     .
+8     .     .     .     .    240    .     .     .     .     .
+9     .     .    120    .     .     .     .     .     .     .
+12    .     .     .     .    720    .     .     .     .     .
+13    .     .     .     .     .    600    .     .     .     .
+14    .     .     .     .     .     .    360    .     .     .
+17    .     .     .     .     .     .    120    .     .     .
+18    .     .     .     .     .     .     .    120    .     .
+19    .    120    .     .     .     .     .     .     .     .
+20    .     .     .     .     .     .     .     .     .    120
+21    .     .     .     .     .     .     .     .    120    .
+22    .     .     .     .    240    .     .     .     .     .
+23    .     .     .     .     .     .     .     .     .    120
