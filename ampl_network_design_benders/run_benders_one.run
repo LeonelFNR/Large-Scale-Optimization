@@ -1,10 +1,10 @@
 # ------------------------------------------------------------
 # BENDERS DECOMPOSITION FOR NETWORK DESIGN
-# Initial solution: y_a = 0 for all candidate arcs
+# Initial solution: y_a = 1 for all candidate arcs
 # ------------------------------------------------------------
 
 reset;
-model network_design_benders_like_example.mod;
+model network_design_benders.mod;
 data network_design.dat;
 
 option solver cplex;
@@ -13,20 +13,20 @@ option display_eps 1e-6;
 option omit_zero_rows 1;
 option display_1col 20;
 
-# Problem definitions, following the structure of the example
+# Problem definitions
 problem SUBPR: xl, I, caps, zd;
 problem MasterP3: y, zmp3, Bcut, ZMP3;
 
 let nCUT := 0;
-let {(i,j) in Ahat} yb[i,j] := 0;
+let {(i,j) in Ahat} yb[i,j] := 1;
 
 param invest;
 param exploit;
 param sub_total;
 param gap default Infinity;
-#param it integer;
 
-printf "\nBENDERS DECOMPOSITION - INITIAL y=0\n";
+
+printf "\nBENDERS DECOMPOSITION - INITIAL y=1\n";
 printf "iter; master_z; sub_total; investment; exploitation; gap\n";
 
 for {it in 1..Niter} {
@@ -73,7 +73,7 @@ for {it in 1..Niter} {
     let {(i,j) in Ahat} yb[i,j] := round(y[i,j]);
 }
 
-printf "\nFINAL SOLUTION FROM BENDERS, INITIAL y=0\n";
+printf "\nFINAL SOLUTION FROM BENDERS, INITIAL y=1\n";
 display ZMP3;
 display {(i,j) in Ahat: y[i,j] > 0.5} y[i,j];
 display {(i,j) in Ahat: y[i,j] < 0.5} y[i,j];
@@ -83,6 +83,7 @@ let {(i,j) in Ahat} yb[i,j] := round(y[i,j]);
 solve SUBPR;
 display zd;
 display {l in O, (i,j) in AA: xl[i,j,l] > 1e-6} xl[i,j,l];
+
 
 printf "\nFINAL INCLUDED CANDIDATE LINKS y[a] = 1\n";
 display {(i,j) in Ahat: y[i,j] > 0.5} y[i,j];
@@ -99,3 +100,5 @@ printf "Exploitation cost: %.6f\n", zd;
 
 printf "Total cost: %.6f\n",
     sum {(i,j) in Ahat} f[i,j]*round(y[i,j]) + zd;
+    
+
