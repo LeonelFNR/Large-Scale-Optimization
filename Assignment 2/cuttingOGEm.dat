@@ -23,7 +23,7 @@ set A := (1,2) (2,1) (1,4) (4,1) (2,3) (3,2)
          (14,13) (15,13) (16,15)  (21,18); 
 param M:= 10000;
 
-#origen destino de arcos añadibles + variable binaria arco añadido/arco no añadido
+#origen destino de arcos aï¿½adibles + variable binaria arco aï¿½adido/arco no aï¿½adido
 # xc:coordenades en l'eix x
 param xc:= 	1 2
 		2 3
@@ -77,22 +77,22 @@ param yc:= 	1 1
 		24 8;
 
 #
-param t default 0 :	3	      11 :=
-               3    100     0
-               5    -10     -10
-               8    -10     -10
-               11   0       100
-               12   -10     -10
-               13   -10     -10
-               14   -10     -10
-               17   -10     -10
-               18   -10     -10
-               19   -10     -10
-               21   -10     -10
-               23		-10     -10;
+param t default 0: 3 11 :=
+3    1200     0
+5    -120  -120
+8    -120  -120
+11      0  1200
+12   -120  -120
+13   -120  -120
+14   -120  -120
+17   -120  -120
+18   -120  -120
+19   -120  -120
+21   -120  -120
+23   -120  -120 ;
 
 
-param rho:=1000;
+param rho:=2500;
 
 
 

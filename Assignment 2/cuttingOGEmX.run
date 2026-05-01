@@ -1,6 +1,6 @@
 model cuttingOGEm.mod;
 data cuttingOGEm.dat;
-#data caps.dat;
+data caps.dat;
 option solver cplexamp; # change appropriately if necessary
 
 

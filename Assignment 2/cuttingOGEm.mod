@@ -26,20 +26,35 @@ subject to total_flow {(i,j) in A}: xx[i,j] = sum{l in O} xl[i,j,l];
 
 minimize w: (sum {(i,j) in A} c[i,j]*xx[i,j])+
                 sum{(i,j) in A} mu[i,j]*(xx[i,j] - y[i,j])+
-                rho*(sum{o in artN, l in O} art1[o,l])+
-                rho*(sum{o in artN, i in N, l in O} art2[o,i,l]);
+                M*(sum{o in artN, l in O} art1[o,l])+
+                M*(sum{o in artN, i in N, l in O} art2[o,i,l]);
 subject to caps {(i,j) in A}: xx[i,j]<=y[i,j];
 
 var z;
 var mu0{A}>=0;
-param YY{1..nCUT} default M;
+param YY{1..nCUT} binary default 1;
 maximize Z: z;
 param xxX{A,{1..nCUT}} default 0;
 param art1X{o in artN,l in O, k in {1..nCUT}} default 0;
 param art2X{o in artN, i in N, l in O, k in {1..nCUT}} default 0;
 subject to cuts{k in {1..nCUT}}: z <= (sum {(i,j) in A} c[i,j]*xxX[i,j,k])+
                 sum{(i,j) in A} mu0[i,j]*(xxX[i,j,k] - y[i,j])+
-                rho*(sum{o in artN, l in O} art1X[o,l,k])+
-                rho*(sum{o in artN, i in N, l in O} art2X[o,i,l,k]) + M*YY[k];
+                M*(sum{o in artN, l in O} art1X[o,l,k])+
+                M*(sum{o in artN, i in N, l in O} art2X[o,i,l,k])+
+                M * YY[k];
 
+# ------------------------------------------------------------
+# GENERALIZED LINEAR PROGRAMMING (PART 7)
+# ------------------------------------------------------------
 
+var alpha {k in 1..nCUT} >= 0;
+
+minimize GLP_Obj:
+    sum {k in 1..nCUT} alpha[k] *
+        sum {(i,j) in A} c[i,j] * xxX[i,j,k];
+
+subject to Convexity:
+    sum {k in 1..nCUT} alpha[k] = 1;
+
+subject to Conv_Caps {(i,j) in A}:
+    sum {k in 1..nCUT} alpha[k] * xxX[i,j,k] <= y[i,j];
