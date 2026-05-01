@@ -7,9 +7,9 @@ option solver cplex;
 
 # Define the problems to solve
 problem MP: z,mu0,cuts,Z;
-problem w_aval_uncap: xl,xx,I,art,total_flow,caps,w;
+problem w_aval_uncap: xl,xx,I,art,total_flow,w;
 problem w_aval: xl,xx,I,art,total_flow,caps,w;
-problem GLP_prob: alpha, GLP_Obj, Convexity, Conv_Caps;
+problem GLP_prob: alpha, GLP_Obj, Convexity, Conv_Caps, GLP_active;
 
 # Algorithm control parameters
 param epsilon_abs default 1e-3;    # absolute convergence tolerance
@@ -29,6 +29,9 @@ param best_primal_iter default 0;
 param best_primal_defined default 0;
 param best_gap default Infinity;
 param gap_tolerance default 0;
+param xxBest{A} default 0;
+param art1Best{o in artN, l in O} default 0;
+param art2Best{o in artN, i in N, l in O} default 0;
 
 
 # ======================================================================
@@ -71,6 +74,10 @@ solve w_aval;
 let best_primal_obj := sum{(i,j) in A} c[i,j]*xx[i,j];
 let best_primal_iter := 0;
 let best_primal_defined := 1;
+let {(i,j) in A} xxBest[i,j] := xx[i,j];
+let {(i,j) in A, l in O} xlX[i,j,l,1] := xl[i,j,l];
+let {o in artN, l in O} art1Best[o,l] := art1[o,l];
+let {o in artN, i in N, l in O} art2Best[o,i,l] := art2[o,i,l];
 
 printf "Initial Capacitated Problem Solution (with artificial arcs):\n";
 printf "Objective value w(0) = %f\n", w;
@@ -167,6 +174,7 @@ repeat {
     
     if iteration_count < nCUT then {
         let {(i,j) in A} xxX[i,j,iteration_count+1] := xx[i,j];
+        let {(i,j) in A, l in O} xlX[i,j,l,iteration_count+1] := xl[i,j,l];
         let {o in artN, l in O} art1X[o,l,iteration_count+1] := art1[o,l];
         let {o in artN, i in N, l in O} art2X[o,i,l,iteration_count+1] := art2[o,i,l];
     }
@@ -178,23 +186,29 @@ repeat {
             let best_primal_obj := c_T_x_k_plus_1;
             let best_primal_iter := iteration_count;
             let best_primal_defined := 1;
+            let {(i,j) in A} xxBest[i,j] := xx[i,j];
+            let {o in artN, l in O} art1Best[o,l] := art1[o,l];
+            let {o in artN, i in N, l in O} art2Best[o,i,l] := art2[o,i,l];
         }
     } else {
         printf "  Feasibility: INFEASIBLE (xk+1 violates capacity constraints)\n";
     }
 
     # Gap and convergence
-    let gap_tolerance := max(epsilon_abs, epsilon_rel * abs(zk_best));
-    let best_gap := abs(zk_best - w_mu_k);
-    printf "  Gap: %f  (tolerance %f)\n", best_gap, gap_tolerance;
-
-    if feasible_found = 1 && best_gap <= gap_tolerance then {
-        let converged := 1;
-    }
-    
-    if iteration_count >= max_iterations || converged = 1 then {
-        break;
-    }
+	let gap_tolerance := max(epsilon_abs, epsilon_rel * abs(zk_best));
+	let best_gap := abs(zk_best - w_mu_k);
+	
+	printf "  Gap: %f  (tolerance %f)\n", best_gap, gap_tolerance;
+	
+	if best_gap <= gap_tolerance then {
+	    printf "STOP: convergence reached (zk = w(mu_k))\n";
+	    break;
+	}
+	
+	if iteration_count >= max_iterations then {
+	    printf "STOP: max iterations reached\n";
+	    break;
+	}
 }
 
 # ======================================================================
@@ -228,16 +242,16 @@ for {(i,j) in A}{
 
 printf "\nFinal Solution (flows):\n";
 for {(i,j) in A}{
-    if xx[i,j] > 0.001 then printf "  Arc (%d,%d): %f (capacity: %f)\n", i, j, xx[i,j], y[i,j];
+    if xxBest[i,j] > 0.001 then printf "  Arc (%d,%d): %f (capacity: %f)\n", i, j, xxBest[i,j], y[i,j];
 }
 
 printf "\nFlows per origin:\n";
 for {l in O}{
-    printf "  Origin %d: %f units\n", l, sum{(i,j) in A: i=l} xx[i,j];
+    printf "  Origin %d: %f units\n", l, sum{(i,j) in A: i=l} xxBest[i,j];
 }
 
 printf "\nTotal flow:\n";
-printf "  Sum of all flows: %f\n\n", sum{(i,j) in A} xx[i,j];
+printf "  Sum of all flows: %f\n\n", sum{(i,j) in A} xxBest[i,j];
 
 if best_primal_defined = 1 then {
     printf "Best feasible capacitated primal solution found at iteration %d with cost %f\n", best_primal_iter, best_primal_obj;
@@ -245,40 +259,50 @@ if best_primal_defined = 1 then {
     printf "No feasible capacitated primal solution was recorded.\n";
 }
 
-# ======================================================================
-# STEP 5: GENERALIZED LINEAR PROGRAMMING (DUAL) PROBLEM
-# ======================================================================
 printf "\n===============================================================================\n";
 printf "STEP 5: GENERALIZED LINEAR PROGRAMMING (DUAL) PROBLEM\n";
 printf "===============================================================================\n\n";
 
-# Activate only the cuts we actually generated
-for {k in iteration_count+1..nCUT}{
-    let YY[k] := 1; # disable cuts we didn't generate
+for {k in iteration_count+1..nCUT} {
+    let YY[k] := 1;
 }
 
-# Restrict GLP to use only generated solutions
-subject to GLP_active {k in iteration_count+1..nCUT}: alpha[k] = 0;
+for {k in 1..nCUT} {
+    let activeAlpha[k] := if k <= iteration_count then 1 else 0;
+}
 
 solve GLP_prob;
 
 printf "GLP Solution:\n";
 printf "  Objective value: %f\n", GLP_Obj;
+
 printf "\nConvexity weights (alpha):\n";
-for {k in 1..iteration_count}{
-    if alpha[k] > 1e-6 then printf "  alpha[%d] = %f\n", k, alpha[k];
+for {k in 1..iteration_count: alpha[k] > 1e-6} {
+    printf "  alpha[%d] = %f\n", k, alpha[k];
 }
 
 printf "\nOptimal convex combination of solutions:\n";
-for {(i,j) in A}{
-    if sum{k in 1..iteration_count} alpha[k] * xxX[i,j,k] > 0.001 then
-        printf "  Arc (%d,%d): %f\n", i, j, sum{k in 1..iteration_count} alpha[k] * xxX[i,j,k];
+for {(i,j) in A:
+    sum {k in 1..iteration_count} alpha[k]*xxX[i,j,k] > 1e-6} {
+    printf "  Arc (%d,%d): %f\n",
+        i, j,
+        sum {k in 1..iteration_count} alpha[k]*xxX[i,j,k];
+}
+
+printf "\nGLP flows by origin on each arc:\n";
+for {l in O, (i,j) in A:
+    sum {k in 1..iteration_count} alpha[k]*xlX[i,j,l,k] > 1e-6} {
+    printf "  Origin %d, arc (%d,%d): %f\n",
+        l, i, j,
+        sum {k in 1..iteration_count} alpha[k]*xlX[i,j,l,k];
 }
 
 printf "\nConvex Combination Flow per Origin:\n";
-for {l in O}{
-    printf "  Origin %d: %f units\n", l,
-        sum{k in 1..iteration_count} alpha[k] * sum{(i,j) in A: i=l} xxX[i,j,k];
+for {l in O} {
+    printf "  Origin %d: %f units\n",
+        l,
+        sum {(i,j) in A, k in 1..iteration_count}
+            alpha[k]*xlX[i,j,l,k];
 }
 
 printf "\n===============================================================================\n";

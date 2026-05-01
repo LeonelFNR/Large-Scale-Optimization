@@ -23,6 +23,9 @@ arc xl {(i,j) in A, l in O}>=0: from I [i,l], to I [j,l];
 arc art1{o in artN, l in O}>=0: from I [l,l], to art [o,l];
 arc art2{o in artN, i in N, l in O} >=0: from art[o,l], to I[i,l];
 
+param activeAlpha{1..nCUT} binary default 1;
+
+
 subject to total_flow {(i,j) in A}: xx[i,j] = sum{l in O} xl[i,j,l];
 
 minimize w: (sum {(i,j) in A} c[i,j]*xx[i,j])+
@@ -36,6 +39,12 @@ var mu0{A}>=0;
 param YY{1..nCUT} binary default 1;
 maximize Z: z;
 param xxX{A,{1..nCUT}} default 0;
+
+# Stores the disaggregated flow by origin for every generated solution.
+# This is needed to reconstruct and report the GLP final flow per origin,
+# since xxX only stores the total flow on each arc.
+param xlX {(i,j) in A, l in O, k in 1..nCUT} default 0;
+
 param art1X{o in artN,l in O, k in {1..nCUT}} default 0;
 param art2X{o in artN, i in N, l in O, k in {1..nCUT}} default 0;
 subject to cuts{k in {1..nCUT}}: z <= (sum {(i,j) in A} c[i,j]*xxX[i,j,k])+
@@ -55,3 +64,6 @@ subject to Convexity:
 
 subject to Conv_Caps {(i,j) in A}:
     sum {k in 1..nCUT} alpha[k] * xxX[i,j,k] <= y[i,j];
+
+subject to GLP_active {k in 1..nCUT}:
+    alpha[k] <= activeAlpha[k];
