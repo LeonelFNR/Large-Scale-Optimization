@@ -10,12 +10,12 @@ param y{A} default M;
 param xc {N};
 param yc {N};
 param t {i in N,l in O};
-param c {(i,j) in A} :=150+(((xc[i]-xc[j])^2)+((yc[i]-yc[j])^2));
+param c {(i,j) in A} :=100 + (xc[i]-xc[j])^2 + (2*yc[i]-yc[j])^2;
 param rho>0;
 param nCUT;
 param mu{(i,j) in A} >=0, default 0; # els multiplicadors
 var xx{A};
-node I {i in N, l in O}: net_out=t[i,l]; #si positivo ==> inyección, si negativo extracción
+node I {i in N, l in O}: net_out=t[i,l]; #si positivo ==> inyecciï¿½n, si negativo extracciï¿½n
 node art{o in artN, l in O}: net_out=0;
 
 arc xl {(i,j) in A, l in O}>=0: from I [i,l], to I [j,l];
