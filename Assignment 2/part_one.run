@@ -1,0 +1,26 @@
+reset;
+
+model cuttingOGE.mod;
+data cuttingOGE.dat;
+option solver cplex; # change appropriately if necessary
+
+
+problem PART1: xl,xx,I,total_flow,COST;
+
+solve PART1; 
+
+printf "UNCAPACITATED PROBLEM\n" > "part1.txt";
+
+printf "Optimal objective value: %.6f\n\n", COST >> "part1.txt";
+
+printf "Total flow on each used link:\n" >> "part1.txt";
+
+for {(i,j) in A: xx[i,j] > 1e-6} {
+    printf "(%d,%d): %.2f\n", i, j, xx[i,j] >> "part1.txt";
+}
+
+printf "\nFlow by origin on each used link:\n" >> "part1.txt";
+
+for {l in O, (i,j) in A: xl[i,j,l] > 1e-6} {
+    printf "l=%d, (%d,%d): %.2f\n", l, i, j, xl[i,j,l] >> "part1.txt";
+}

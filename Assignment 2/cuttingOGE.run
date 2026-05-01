@@ -1,3 +1,5 @@
+reset;
+
 model cuttingOGE.mod;
 data cuttingOGE.dat;
 data caps.dat;
