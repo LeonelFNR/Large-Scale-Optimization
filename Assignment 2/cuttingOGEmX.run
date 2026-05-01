@@ -1,21 +1,288 @@
+reset;
+
 model cuttingOGEm.mod;
 data cuttingOGEm.dat;
 data caps.dat;
-option solver cplexamp; # change appropriately if necessary
+option solver cplex;
+
+# Define the problems to solve
+problem MP: z,mu0,cuts,Z;
+problem w_aval_uncap: xl,xx,I,art,total_flow,caps,w;
+problem w_aval: xl,xx,I,art,total_flow,caps,w;
+problem GLP_prob: alpha, GLP_Obj, Convexity, Conv_Caps;
+
+# Algorithm control parameters
+param epsilon_abs default 1e-3;    # absolute convergence tolerance
+param epsilon_rel default 1e-4;    # relative convergence tolerance
+param max_iterations default 100;
+param iteration_count default 0;
+param converged default 0;
+param feasible_found default 0;
+
+# Store solution values
+param zk_best default -Infinity;
+param w_mu_k default Infinity;
+param c_T_x_k_plus_1 default Infinity;
+param is_feasible_solution default 0;
+param best_primal_obj default Infinity;
+param best_primal_iter default 0;
+param best_primal_defined default 0;
+param best_gap default Infinity;
+param gap_tolerance default 0;
 
 
-problem MP: z,mu0,cuts,Z; # check and compete if necessary
+# ======================================================================
+# STEP 1: UNCAPACITATED PROBLEM SOLUTION
+# ======================================================================
+printf "\n===============================================================================\n";
+printf "STEP 1: SOLVING UNCAPACITATED PROBLEM (without capacity constraints)\n";
+printf "===============================================================================\n\n";
 
-problem w_aval: xl,xx,I,art,total_flow,caps,w; # check and complete if necessary
+# Solve uncapacitated problem
+solve w_aval_uncap;
 
-param jj default 1;
-param nCUT0 default 1;
-
-for {1..nCUT0}{
-    let YY[jj]:= 0; # enables the jj-th constraint.
-     # COMPLETE
-
-    let jj:=jj+1; 
+printf "Uncapacitated Problem Solution:\n";
+printf "Objective value w(0) = %f\n", w;
+printf "\nFlows per origin-destination pair:\n";
+for {(i,j) in A}{
+    if xx[i,j] > 0.001 then printf "  Arc (%d,%d): %f\n", i, j, xx[i,j];
 }
+
+# Store uncapacitated solution for flowouts
+printf "\nFlows per origin:\n";
+for {l in O}{
+    printf "  Origin %d: %f units\n", l, sum{(i,j) in A: i=l} xx[i,j];
+}
+
+# Total flows
+printf "\nTotal flow (for verification):\n";
+printf "  Sum of all flows: %f\n", sum{(i,j) in A} xx[i,j];
+
+# ======================================================================
+# STEP 2: CAPACITATED PROBLEM WITH ARTIFICIAL ARCS
+# ======================================================================
+printf "\n===============================================================================\n";
+printf "STEP 2: SOLVING CAPACITATED PROBLEM WITH ARTIFICIAL ARCS\n";
+printf "===============================================================================\n\n";
+
+# Add capacity constraints and solve with big-M artificial arcs
+solve w_aval;
+
+let best_primal_obj := sum{(i,j) in A} c[i,j]*xx[i,j];
+let best_primal_iter := 0;
+let best_primal_defined := 1;
+
+printf "Initial Capacitated Problem Solution (with artificial arcs):\n";
+printf "Objective value w(0) = %f\n", w;
+printf "\nFlows per origin-destination pair:\n";
+for {(i,j) in A}{
+    if xx[i,j] > 0.001 then printf "  Arc (%d,%d): %f\n", i, j, xx[i,j];
+}
+
+printf "\nArtificial flow arc1 (injection through artificial node):\n";
+for {o in artN, l in O}{
+    if art1[o,l] > 0.001 then printf "  Origin %d, Art node %d: %f\n", l, o, art1[o,l];
+}
+
+printf "\nArtificial flow arc2 (extraction from artificial node):\n";
+for {o in artN, i in N, l in O}{
+    if art2[o,i,l] > 0.001 then printf "  Art node %d -> Node %d, Origin %d: %f\n", o, i, l, art2[o,i,l];
+}
+
+printf "\nFlows per origin:\n";
+for {l in O}{
+    printf "  Origin %d: %f units\n", l, sum{(i,j) in A: i=l} xx[i,j];
+}
+
+printf "\nTotal flow:\n";
+printf "  Sum of all flows: %f\n", sum{(i,j) in A} xx[i,j];
+
+printf "\nDual variables µ (lagrangian multipliers) for capacity constraints:\n";
+printf "  (All zero at start: µ0 = 0)\n";
+
+# ======================================================================
+# STEP 3: CUTTING PLANE ALGORITHM ITERATION
+# ======================================================================
+printf "\n===============================================================================\n";
+printf "STEP 3: DANTZIG CUTTING PLANE ALGORITHM\n";
+printf "===============================================================================\n\n";
+
+# Initialize cutting plane algorithm
+let iteration_count := 0;
+let converged := 0;
+let feasible_found := 0;
+
+# Store first solution as initial cut
+param xxX_temp{A};
+param art1X_temp{artN,O};
+param art2X_temp{artN,N,O};
+
+let {(i,j) in A} xxX_temp[i,j] := xx[i,j];
+let {o in artN, l in O} art1X_temp[o,l] := art1[o,l];
+let {o in artN, i in N, l in O} art2X_temp[o,i,l] := art2[o,i,l];
+
+let {(i,j) in A} xxX[i,j,1] := xxX_temp[i,j];
+let {o in artN, l in O} art1X[o,l,1] := art1X_temp[o,l];
+let {o in artN, i in N, l in O} art2X[o,i,l,1] := art2X_temp[o,i,l];
+
+# Start iteration
+repeat {
+    let iteration_count := iteration_count + 1;
+    
+    printf "\n--- Iteration %d ---\n", iteration_count;
+    
+    # Enable current cut
+    let YY[iteration_count] := 0;
+    
+    # Solve Master Problem
+    solve MP;
+    
+    let zk_best := z;
+    printf "  zk (Master Problem value): %f\n", zk_best;
+    printf "  Dual variables µ:\n";
+    for {(i,j) in A}{
+        if mu0[i,j] > 0.0001 then printf "    Arc (%d,%d): %f\n", i, j, mu0[i,j];
+    }
+    
+    # Update Lagrangian multipliers in subproblem
+    let {(i,j) in A} mu[i,j] := mu0[i,j];
+    
+    # Solve Subproblem (Lagrangian evaluation - without capacity constraints)
+    solve w_aval_uncap;
+    let w_mu_k := w;
+    printf "  w(µk) (Subproblem value): %f\n", w_mu_k;
+    
+    # Compute primal objective
+    let c_T_x_k_plus_1 := sum{(i,j) in A} c[i,j]*xx[i,j];
+    printf "  cTxk+1 (Primal objective): %f\n", c_T_x_k_plus_1;
+    
+    # Check feasibility of solution
+    let is_feasible_solution := 1;
+    for {(i,j) in A}{
+        if xx[i,j] > y[i,j] + 1e-6 then {
+            let is_feasible_solution := 0;
+            break;
+        }
+    }
+    
+    if iteration_count < nCUT then {
+        let {(i,j) in A} xxX[i,j,iteration_count+1] := xx[i,j];
+        let {o in artN, l in O} art1X[o,l,iteration_count+1] := art1[o,l];
+        let {o in artN, i in N, l in O} art2X[o,i,l,iteration_count+1] := art2[o,i,l];
+    }
+
+    if is_feasible_solution = 1 then {
+        printf "  Feasibility: FEASIBLE (xk+1 satisfies capacity constraints)\n";
+        let feasible_found := 1;
+        if c_T_x_k_plus_1 < best_primal_obj then {
+            let best_primal_obj := c_T_x_k_plus_1;
+            let best_primal_iter := iteration_count;
+            let best_primal_defined := 1;
+        }
+    } else {
+        printf "  Feasibility: INFEASIBLE (xk+1 violates capacity constraints)\n";
+    }
+
+    # Gap and convergence
+    let gap_tolerance := max(epsilon_abs, epsilon_rel * abs(zk_best));
+    let best_gap := abs(zk_best - w_mu_k);
+    printf "  Gap: %f  (tolerance %f)\n", best_gap, gap_tolerance;
+
+    if feasible_found = 1 && best_gap <= gap_tolerance then {
+        let converged := 1;
+    }
+    
+    if iteration_count >= max_iterations || converged = 1 then {
+        break;
+    }
+}
+
+# ======================================================================
+# STEP 4: FINAL RESULTS
+# ======================================================================
+printf "\n===============================================================================\n";
+printf "STEP 4: FINAL RESULTS\n";
+printf "===============================================================================\n\n";
+
+if feasible_found = 1 then {
+    printf "STATUS: Optimal solution found (feasible).\n";
+} else {
+    printf "STATUS: Algorithm terminated (max iterations or convergence criterion).\n";
+}
+
+printf "\nAlgorithm Summary:\n";
+printf "  Total iterations: %d\n", iteration_count;
+printf "  Master Problem value (zk): %f\n", zk_best;
+printf "  Subproblem value (w(µk)): %f\n", w_mu_k;
+printf "  Convergence tolerances: abs=%f, rel=%f\n", epsilon_abs, epsilon_rel;
+if abs(zk_best) > 1e-8 then {
+    printf "  Gap: %f (%.4f %%)\n", zk_best - w_mu_k, 100*(zk_best - w_mu_k)/abs(zk_best);
+} else {
+    printf "  Gap: %f\n", zk_best - w_mu_k;
+}
+
+printf "\nFinal Dual Variables (µ):\n";
+for {(i,j) in A}{
+    if mu0[i,j] > 1e-6 then printf "  Arc (%d,%d): %f\n", i, j, mu0[i,j];
+}
+
+printf "\nFinal Solution (flows):\n";
+for {(i,j) in A}{
+    if xx[i,j] > 0.001 then printf "  Arc (%d,%d): %f (capacity: %f)\n", i, j, xx[i,j], y[i,j];
+}
+
+printf "\nFlows per origin:\n";
+for {l in O}{
+    printf "  Origin %d: %f units\n", l, sum{(i,j) in A: i=l} xx[i,j];
+}
+
+printf "\nTotal flow:\n";
+printf "  Sum of all flows: %f\n\n", sum{(i,j) in A} xx[i,j];
+
+if best_primal_defined = 1 then {
+    printf "Best feasible capacitated primal solution found at iteration %d with cost %f\n", best_primal_iter, best_primal_obj;
+} else {
+    printf "No feasible capacitated primal solution was recorded.\n";
+}
+
+# ======================================================================
+# STEP 5: GENERALIZED LINEAR PROGRAMMING (DUAL) PROBLEM
+# ======================================================================
+printf "\n===============================================================================\n";
+printf "STEP 5: GENERALIZED LINEAR PROGRAMMING (DUAL) PROBLEM\n";
+printf "===============================================================================\n\n";
+
+# Activate only the cuts we actually generated
+for {k in iteration_count+1..nCUT}{
+    let YY[k] := 1; # disable cuts we didn't generate
+}
+
+# Restrict GLP to use only generated solutions
+subject to GLP_active {k in iteration_count+1..nCUT}: alpha[k] = 0;
+
+solve GLP_prob;
+
+printf "GLP Solution:\n";
+printf "  Objective value: %f\n", GLP_Obj;
+printf "\nConvexity weights (alpha):\n";
+for {k in 1..iteration_count}{
+    if alpha[k] > 1e-6 then printf "  alpha[%d] = %f\n", k, alpha[k];
+}
+
+printf "\nOptimal convex combination of solutions:\n";
+for {(i,j) in A}{
+    if sum{k in 1..iteration_count} alpha[k] * xxX[i,j,k] > 0.001 then
+        printf "  Arc (%d,%d): %f\n", i, j, sum{k in 1..iteration_count} alpha[k] * xxX[i,j,k];
+}
+
+printf "\nConvex Combination Flow per Origin:\n";
+for {l in O}{
+    printf "  Origin %d: %f units\n", l,
+        sum{k in 1..iteration_count} alpha[k] * sum{(i,j) in A: i=l} xxX[i,j,k];
+}
+
+printf "\n===============================================================================\n";
+printf "END OF ALGORITHM\n";
+printf "===============================================================================\n";
 
 

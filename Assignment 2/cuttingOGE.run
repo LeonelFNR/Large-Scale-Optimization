@@ -10,4 +10,6 @@ problem PLAIN: xl,xx,I,total_flow,caps,COST;
 
 solve PLAIN; 
 
+printf "Optimal objective value: %.6f\n\n", COST;
+
 for {(i,j) in A: xx[i,j]>0}{printf "%d %d %6.2f \n", i,j, xx[i,j] >> flows.dat;}

@@ -5,6 +5,7 @@ set O within N;
 set A within N cross N; #arcos fijos
 #set Aart1{O}; 
 param M;
+param BigM;
 param y{A} default M; 
 
 param xc {N};
@@ -41,11 +42,7 @@ subject to cuts{k in {1..nCUT}}: z <= (sum {(i,j) in A} c[i,j]*xxX[i,j,k])+
                 sum{(i,j) in A} mu0[i,j]*(xxX[i,j,k] - y[i,j])+
                 M*(sum{o in artN, l in O} art1X[o,l,k])+
                 M*(sum{o in artN, i in N, l in O} art2X[o,i,l,k])+
-                M * YY[k];
-
-# ------------------------------------------------------------
-# GENERALIZED LINEAR PROGRAMMING (PART 7)
-# ------------------------------------------------------------
+                BigM * YY[k];
 
 var alpha {k in 1..nCUT} >= 0;
 
