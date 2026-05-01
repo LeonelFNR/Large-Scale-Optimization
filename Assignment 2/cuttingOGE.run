@@ -3,7 +3,7 @@ reset;
 model cuttingOGE.mod;
 data cuttingOGE.dat;
 data caps.dat;
-option solver cplexamp; # change appropriately if necessary
+option solver cplex; # change appropriately if necessary
 
 
 problem PLAIN: xl,xx,I,total_flow,caps,COST;
