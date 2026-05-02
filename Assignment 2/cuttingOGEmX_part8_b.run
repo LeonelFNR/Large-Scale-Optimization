@@ -59,6 +59,8 @@ let {o in artN, l in O} art1X_temp[o,l] := art1[o,l];
 let {o in artN, i in N, l in O} art2X_temp[o,i,l] := art2[o,i,l];
 
 let {(i,j) in A} xxX[i,j,1] := xxX_temp[i,j];
+let {(i,j) in A, l in O}  xlX[i,j,l,1] := xl[i,j,l];
+
 let {o in artN, l in O} art1X[o,l,1] := art1X_temp[o,l];
 let {o in artN, i in N, l in O} art2X[o,i,l,1] := art2X_temp[o,i,l];
 
