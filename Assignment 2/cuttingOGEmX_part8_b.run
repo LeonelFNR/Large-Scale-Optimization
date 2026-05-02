@@ -1,0 +1,267 @@
+reset;
+
+model cuttingOGEm.mod;
+data cuttingOGEm.dat;
+data caps.dat;
+option solver cplex;
+
+problem MP: z,mu0,cuts,Z;
+problem w_aval_uncap: xl,xx,I,art,total_flow,w;
+problem w_aval: xl,xx,I,art,total_flow,caps,w;
+problem GLP_prob: alpha, GLP_Obj, Convexity, Conv_Caps, GLP_active;
+
+param epsilon_abs default 1e-3;
+param epsilon_rel default 1e-4;
+param max_iterations default 100;
+param iteration_count default 0;
+param gap_tolerance default 0;
+param best_gap default Infinity;
+param ak;
+
+param feasible_found default 0;
+param is_feasible_solution default 0;
+
+param zk_best default -Infinity;
+param w_mu_k default Infinity;
+param c_T_x_k_plus_1 default Infinity;
+
+param xxBest{A} default 0;
+
+# ======================================================================
+# STEP 1
+# ======================================================================
+printf "\nSTEP 1: UNCAPACITATED\n\n";
+
+solve w_aval_uncap;
+
+# ======================================================================
+# STEP 2
+# ======================================================================
+printf "\nSTEP 2: CAPACITATED WITH ARTIFICIAL ARCS\n\n";
+
+solve w_aval;
+
+let {(i,j) in A} xxBest[i,j] := xx[i,j];
+
+# ======================================================================
+# STEP 3: CUTTING PLANE (VARIANT)
+# ======================================================================
+printf "\nSTEP 3: CUTTING PLANE (VARIANT a_k = 1/(k+1))\n\n";
+
+let iteration_count := 0;
+
+param xxX_temp{A};
+param art1X_temp{artN,O};
+param art2X_temp{artN,N,O};
+
+let {(i,j) in A} xxX_temp[i,j] := xx[i,j];
+let {o in artN, l in O} art1X_temp[o,l] := art1[o,l];
+let {o in artN, i in N, l in O} art2X_temp[o,i,l] := art2[o,i,l];
+
+let {(i,j) in A} xxX[i,j,1] := xxX_temp[i,j];
+let {o in artN, l in O} art1X[o,l,1] := art1X_temp[o,l];
+let {o in artN, i in N, l in O} art2X[o,i,l,1] := art2X_temp[o,i,l];
+
+repeat {
+
+    let iteration_count := iteration_count + 1;
+
+    printf "\n--- Iteration %d ---\n", iteration_count;
+
+    let YY[iteration_count] := 0;
+
+    # MASTER
+    solve MP;
+
+    let zk_best := z;
+    printf "  zk: %f\n", zk_best;
+
+    printf "  mu_hat:\n";
+    for {(i,j) in A: mu0[i,j] > 1e-4} {
+        printf "    (%d,%d): %f\n", i,j,mu0[i,j];
+    }
+
+    # ============================
+    # VARIANT UPDATE
+    # ============================
+    let ak := iteration_count^2 / sum {r in 1..iteration_count} r^2;
+    
+
+    printf "  Step size ak: %f\n", ak;
+
+    let {(i,j) in A}
+        mu[i,j] := mu[i,j] + ak * (mu0[i,j] - mu[i,j]);
+
+    printf "  mu used:\n";
+    for {(i,j) in A: mu[i,j] > 1e-4} {
+        printf "    (%d,%d): %f\n", i,j,mu[i,j];
+    }
+    # ============================
+
+    # SUBPROBLEM
+    solve w_aval_uncap;
+
+    let w_mu_k := w;
+    printf "  w(mu): %f\n", w_mu_k;
+
+    let c_T_x_k_plus_1 := sum{(i,j) in A} c[i,j]*xx[i,j];
+    printf "  cTx: %f\n", c_T_x_k_plus_1;
+
+    # Feasibility
+    let is_feasible_solution := 1;
+    for {(i,j) in A} {
+        if xx[i,j] > y[i,j] + 1e-6 then {
+            let is_feasible_solution := 0;
+            break;
+        }
+    }
+
+    if is_feasible_solution = 1 then {
+        printf "  FEASIBLE\n";
+        let feasible_found := 1;
+    } else {
+        printf "  INFEASIBLE\n";
+    }
+
+    # GAP
+    let gap_tolerance := max(epsilon_abs, epsilon_rel * abs(zk_best));
+    let best_gap := abs(zk_best - w_mu_k);
+
+    printf "  Gap: %f (tol %f)\n", best_gap, gap_tolerance;
+
+    if best_gap <= gap_tolerance then {
+        printf "STOP: convergence reached\n";
+        break;
+    }
+
+    if iteration_count >= max_iterations then {
+        printf "STOP: max iterations\n";
+        break;
+    }
+
+    # STORE CUT
+    if iteration_count < nCUT then {
+        let {(i,j) in A} xxX[i,j,iteration_count+1] := xx[i,j];
+        let {(i,j) in A, l in O} xlX[i,j,l,iteration_count+1] := xl[i,j,l];
+        let {o in artN, l in O} art1X[o,l,iteration_count+1] := art1[o,l];
+        let {o in artN, i in N, l in O} art2X[o,i,l,iteration_count+1] := art2[o,i,l];
+    }
+}
+
+# ======================================================================
+# STEP 5: GLP
+# ======================================================================
+printf "\nSTEP 5: GLP\n\n";
+
+for {k in iteration_count+1..nCUT} {
+    let YY[k] := 1;
+}
+
+for {k in 1..nCUT} {
+    let activeAlpha[k] := if k <= iteration_count then 1 else 0;
+}
+
+solve GLP_prob;
+
+printf "GLP Obj: %f\n", GLP_Obj;
+
+for {k in 1..iteration_count: alpha[k] > 1e-6} {
+    printf "alpha[%d] = %f\n", k, alpha[k];
+}
+
+
+# ======================================================================
+# STEP 4: FINAL RESULTS
+# ======================================================================
+printf "\n===============================================================================\n";
+printf "FINAL RESULTS\n";
+printf "===============================================================================\n\n";
+
+if feasible_found = 1 then {
+    printf "STATUS: Feasible solution found during iterations.\n";
+} else {
+    printf "STATUS: No feasible solution found within max iterations.\n";
+}
+
+printf "\nAlgorithm Summary:\n";
+printf "  Total iterations: %d\n", iteration_count;
+printf "  Master value (zk): %f\n", zk_best;
+printf "  Subproblem value (w(mu_k)): %f\n", w_mu_k;
+printf "  Gap: %f\n", zk_best - w_mu_k;
+
+# ------------------------------------------------------------
+# Dual variables
+# ------------------------------------------------------------
+printf "\nFinal dual variables (mu_hat from last master):\n";
+for {(i,j) in A: mu0[i,j] > 1e-6} {
+    printf "  Arc (%d,%d): %f\n", i, j, mu0[i,j];
+}
+
+# ------------------------------------------------------------
+# Flows (best known)
+# ------------------------------------------------------------
+printf "\nBest solution (flows):\n";
+for {(i,j) in A: xxBest[i,j] > 1e-6} {
+    printf "  Arc (%d,%d): %f (capacity %f)\n",
+        i, j, xxBest[i,j], y[i,j];
+}
+
+# ------------------------------------------------------------
+# Flow per origin
+# ------------------------------------------------------------
+printf "\nFlow per origin:\n";
+for {l in O} {
+    printf "  Origin %d: %f units\n",
+        l,
+        sum {(i,j) in A: i=l} xxBest[i,j];
+}
+
+# ------------------------------------------------------------
+# Total flow
+# ------------------------------------------------------------
+printf "\nTotal flow in network:\n";
+printf "  %f\n", sum {(i,j) in A} xxBest[i,j];
+
+# ------------------------------------------------------------
+# GLP RESULTS (important for comparison)
+# ------------------------------------------------------------
+printf "\n===============================================================================\n";
+printf "GLP RESULTS\n";
+printf "===============================================================================\n";
+
+printf "GLP objective value: %f\n", GLP_Obj;
+
+printf "\nConvex combination weights:\n";
+for {k in 1..iteration_count: alpha[k] > 1e-6} {
+    printf "  alpha[%d] = %f\n", k, alpha[k];
+}
+
+printf "\nGLP total flows:\n";
+for {(i,j) in A:
+    sum {k in 1..iteration_count} alpha[k]*xxX[i,j,k] > 1e-6} {
+
+    printf "  Arc (%d,%d): %f\n",
+        i, j,
+        sum {k in 1..iteration_count} alpha[k]*xxX[i,j,k];
+}
+
+printf "\nGLP flows by origin:\n";
+for {l in O, (i,j) in A:
+    sum {k in 1..iteration_count} alpha[k]*xlX[i,j,l,k] > 1e-6} {
+
+    printf "  Origin %d, arc (%d,%d): %f\n",
+        l, i, j,
+        sum {k in 1..iteration_count} alpha[k]*xlX[i,j,l,k];
+}
+
+printf "\nGLP flow per origin:\n";
+for {l in O} {
+    printf "  Origin %d: %f units\n",
+        l,
+        sum {(i,j) in A, k in 1..iteration_count}
+            alpha[k]*xlX[i,j,l,k];
+}
+
+printf "\n===============================================================================\n";
+printf "END\n";
+printf "===============================================================================\n";
