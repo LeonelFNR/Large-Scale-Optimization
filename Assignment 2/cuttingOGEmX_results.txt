@@ -1,0 +1,462 @@
+ampl: include cuttingOGEmX.run;
+
+===============================================================================
+STEP 1: SOLVING UNCAPACITATED PROBLEM (without capacity constraints)
+===============================================================================
+
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 824880
+37 simplex iterations
+Uncapacitated Problem Solution:
+Objective value w(0) = 824880.000000
+
+Flows per origin-destination pair:
+  Arc (2,1): 120.000000
+  Arc (1,4): 120.000000
+  Arc (3,2): 120.000000
+  Arc (4,9): 120.000000
+  Arc (9,4): 120.000000
+  Arc (6,5): 120.000000
+  Arc (3,7): 240.000000
+  Arc (6,14): 720.000000
+  Arc (14,7): 120.000000
+  Arc (7,19): 360.000000
+  Arc (8,9): 120.000000
+  Arc (9,8): 120.000000
+  Arc (11,8): 240.000000
+  Arc (11,22): 360.000000
+  Arc (11,12): 600.000000
+  Arc (12,13): 480.000000
+  Arc (13,12): 120.000000
+  Arc (13,14): 240.000000
+  Arc (13,17): 240.000000
+  Arc (14,18): 240.000000
+  Arc (22,16): 120.000000
+  Arc (16,18): 120.000000
+  Arc (18,21): 120.000000
+  Arc (22,20): 120.000000
+  Arc (20,21): 120.000000
+  Arc (19,24): 120.000000
+  Arc (22,23): 120.000000
+  Arc (24,23): 120.000000
+  Arc (4,5): 120.000000
+  Arc (3,6): 840.000000
+  Arc (14,13): 360.000000
+
+Flows per origin:
+  Origin 3: 1200.000000 units
+  Origin 11: 1200.000000 units
+
+Total flow (for verification):
+  Sum of all flows: 7200.000000
+
+===============================================================================
+STEP 2: SOLVING CAPACITATED PROBLEM WITH ARTIFICIAL ARCS
+===============================================================================
+
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+12 simplex iterations
+Initial Capacitated Problem Solution (with artificial arcs):
+Objective value w(0) = 998890.000000
+
+Flows per origin-destination pair:
+  Arc (2,1): 120.000000
+  Arc (1,4): 120.000000
+  Arc (3,2): 120.000000
+  Arc (4,9): 120.000000
+  Arc (9,4): 120.000000
+  Arc (6,5): 120.000000
+  Arc (3,7): 680.000000
+  Arc (6,14): 280.000000
+  Arc (7,14): 560.000000
+  Arc (14,7): 30.000000
+  Arc (7,19): 150.000000
+  Arc (8,9): 630.000000
+  Arc (9,8): 120.000000
+  Arc (11,8): 750.000000
+  Arc (9,10): 510.000000
+  Arc (10,13): 510.000000
+  Arc (11,22): 150.000000
+  Arc (11,12): 300.000000
+  Arc (12,13): 180.000000
+  Arc (13,12): 120.000000
+  Arc (13,14): 450.000000
+  Arc (13,17): 360.000000
+  Arc (14,18): 540.000000
+  Arc (17,20): 120.000000
+  Arc (18,21): 300.000000
+  Arc (20,23): 120.000000
+  Arc (21,24): 60.000000
+  Arc (24,19): 90.000000
+  Arc (22,23): 150.000000
+  Arc (23,24): 30.000000
+  Arc (4,5): 120.000000
+  Arc (3,6): 400.000000
+  Arc (14,13): 480.000000
+
+Artificial flow arc1 (injection through artificial node):
+
+Artificial flow arc2 (extraction from artificial node):
+
+Flows per origin:
+  Origin 3: 1200.000000 units
+  Origin 11: 1200.000000 units
+
+Total flow:
+  Sum of all flows: 8910.000000
+
+Dual variables µ (lagrangian multipliers) for capacity constraints:
+  (All zero at start: µ0 = 0)
+
+===============================================================================
+STEP 3: DANTZIG CUTTING PLANE ALGORITHM
+===============================================================================
+
+
+--- Iteration 1 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk (Master Problem value): 998890.000000
+  Dual variables µ:
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 824880
+19 simplex iterations
+  w(µk) (Subproblem value): 824880.000000
+  cTxk+1 (Primal objective): 824880.000000
+  Feasibility: INFEASIBLE (xk+1 violates capacity constraints)
+  Gap: 174010.000000  (tolerance 99.889000)
+
+--- Iteration 2 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+1 simplex iterations
+  zk (Master Problem value): 998890.000000
+  Dual variables µ:
+    Arc (3,6): 395.477273
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 692609.0909
+4 simplex iterations
+  w(µk) (Subproblem value): 692609.090909
+  cTxk+1 (Primal objective): 850800.000000
+  Feasibility: INFEASIBLE (xk+1 violates capacity constraints)
+  Gap: 306280.909091  (tolerance 99.889000)
+
+--- Iteration 3 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+1 simplex iterations
+  zk (Master Problem value): 998890.000000
+  Dual variables µ:
+    Arc (7,19): 763.965986
+    Arc (3,6): 30.857143
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 799325.102
+8 simplex iterations
+  w(µk) (Subproblem value): 799325.102041
+  cTxk+1 (Primal objective): 922560.000000
+  Feasibility: INFEASIBLE (xk+1 violates capacity constraints)
+  Gap: 199564.897959  (tolerance 99.889000)
+
+--- Iteration 4 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+1 simplex iterations
+  zk (Master Problem value): 998890.000000
+  Dual variables µ:
+    Arc (7,19): 348.205782
+    Arc (11,22): 415.760204
+    Arc (3,6): 30.857143
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 866309.7959
+10 simplex iterations
+  w(µk) (Subproblem value): 866309.795918
+  cTxk+1 (Primal objective): 947760.000000
+  Feasibility: INFEASIBLE (xk+1 violates capacity constraints)
+  Gap: 132580.204082  (tolerance 99.889000)
+
+--- Iteration 5 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+2 simplex iterations
+  zk (Master Problem value): 998890.000000
+  Dual variables µ:
+    Arc (7,19): 315.090909
+    Arc (11,22): 288.672014
+    Arc (11,12): 157.399287
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 953388.1818
+8 simplex iterations
+  w(µk) (Subproblem value): 953388.181818
+  cTxk+1 (Primal objective): 855000.000000
+  Feasibility: INFEASIBLE (xk+1 violates capacity constraints)
+  Gap: 45501.818182  (tolerance 99.889000)
+
+--- Iteration 6 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+1 simplex iterations
+  zk (Master Problem value): 998890.000000
+  Dual variables µ:
+    Arc (7,19): 125.500000
+    Arc (11,22): 441.088235
+    Arc (11,12): 183.421569
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 956130
+7 simplex iterations
+  w(µk) (Subproblem value): 956130.000000
+  cTxk+1 (Primal objective): 843960.000000
+  Feasibility: INFEASIBLE (xk+1 violates capacity constraints)
+  Gap: 42760.000000  (tolerance 99.889000)
+
+--- Iteration 7 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+1 simplex iterations
+  zk (Master Problem value): 998890.000000
+  Dual variables µ:
+    Arc (7,19): 303.666667
+    Arc (11,22): 451.568627
+    Arc (11,12): 193.901961
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 985370
+3 simplex iterations
+  w(µk) (Subproblem value): 985370.000000
+  cTxk+1 (Primal objective): 872400.000000
+  Feasibility: INFEASIBLE (xk+1 violates capacity constraints)
+  Gap: 13520.000000  (tolerance 99.889000)
+
+--- Iteration 8 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+1 simplex iterations
+  zk (Master Problem value): 998890.000000
+  Dual variables µ:
+    Arc (7,19): 275.500000
+    Arc (11,22): 522.813725
+    Arc (11,12): 208.813725
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 989230
+1 simplex iterations
+  w(µk) (Subproblem value): 989230.000000
+  cTxk+1 (Primal objective): 867360.000000
+  Feasibility: INFEASIBLE (xk+1 violates capacity constraints)
+  Gap: 9660.000000  (tolerance 99.889000)
+
+--- Iteration 9 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+1 simplex iterations
+  zk (Master Problem value): 998890.000000
+  Dual variables µ:
+    Arc (7,19): 356.000000
+    Arc (11,22): 527.549020
+    Arc (11,12): 213.549020
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 995170
+2 simplex iterations
+  w(µk) (Subproblem value): 995170.000000
+  cTxk+1 (Primal objective): 906360.000000
+  Feasibility: INFEASIBLE (xk+1 violates capacity constraints)
+  Gap: 3720.000000  (tolerance 99.889000)
+
+--- Iteration 10 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+1 simplex iterations
+  zk (Master Problem value): 998890.000000
+  Dual variables µ:
+    Arc (7,19): 325.000000
+    Arc (11,22): 500.196078
+    Arc (11,12): 217.196078
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 997308.8235
+1 simplex iterations
+  w(µk) (Subproblem value): 997308.823529
+  cTxk+1 (Primal objective): 1061160.000000
+  Feasibility: INFEASIBLE (xk+1 violates capacity constraints)
+  Gap: 1581.176471  (tolerance 99.889000)
+
+--- Iteration 11 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+1 simplex iterations
+  zk (Master Problem value): 998890.000000
+  Dual variables µ:
+    Arc (7,19): 280.200000
+    Arc (11,22): 460.666667
+    Arc (11,12): 222.466667
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 993458
+2 simplex iterations
+  w(µk) (Subproblem value): 993458.000000
+  cTxk+1 (Primal objective): 1048800.000000
+  Feasibility: INFEASIBLE (xk+1 violates capacity constraints)
+  Gap: 5432.000000  (tolerance 99.889000)
+
+--- Iteration 12 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+1 simplex iterations
+  zk (Master Problem value): 998890.000000
+  Dual variables µ:
+    Arc (7,19): 319.000000
+    Arc (11,22): 493.000000
+    Arc (11,12): 216.000000
+    Arc (3,6): 1.732143
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998170
+1 simplex iterations
+  w(µk) (Subproblem value): 998170.000000
+  cTxk+1 (Primal objective): 1022160.000000
+  Feasibility: INFEASIBLE (xk+1 violates capacity constraints)
+  Gap: 720.000000  (tolerance 99.889000)
+
+--- Iteration 13 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+1 simplex iterations
+  zk (Master Problem value): 998890.000000
+  Dual variables µ:
+    Arc (7,19): 325.000000
+    Arc (11,22): 498.000000
+    Arc (11,12): 215.000000
+    Arc (3,6): 2.000000
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  w(µk) (Subproblem value): 998890.000000
+  cTxk+1 (Primal objective): 1022160.000000
+  Feasibility: INFEASIBLE (xk+1 violates capacity constraints)
+  Gap: 0.000000  (tolerance 99.889000)
+STOP: convergence reached (zk = w(mu_k))
+
+===============================================================================
+STEP 4: FINAL RESULTS
+===============================================================================
+
+STATUS: Algorithm terminated (max iterations or convergence criterion).
+
+Algorithm Summary:
+  Total iterations: 13
+  Master Problem value (zk): 998890.000000
+  Subproblem value (w(µk)): 998890.000000
+  Convergence tolerances: abs=0.001000, rel=0.000100
+  Gap: 0.000000 (0.0000 %)
+
+Final Dual Variables (µ):
+  Arc (7,19): 325.000000
+  Arc (11,22): 498.000000
+  Arc (11,12): 215.000000
+  Arc (3,6): 2.000000
+
+Final Solution (flows):
+  Arc (2,1): 120.000000 (capacity: 10000.000000)
+  Arc (1,4): 120.000000 (capacity: 10000.000000)
+  Arc (3,2): 120.000000 (capacity: 10000.000000)
+  Arc (4,9): 120.000000 (capacity: 10000.000000)
+  Arc (9,4): 120.000000 (capacity: 10000.000000)
+  Arc (6,5): 120.000000 (capacity: 10000.000000)
+  Arc (3,7): 680.000000 (capacity: 10000.000000)
+  Arc (6,14): 280.000000 (capacity: 300.000000)
+  Arc (7,14): 560.000000 (capacity: 10000.000000)
+  Arc (14,7): 30.000000 (capacity: 10000.000000)
+  Arc (7,19): 150.000000 (capacity: 150.000000)
+  Arc (8,9): 630.000000 (capacity: 10000.000000)
+  Arc (9,8): 120.000000 (capacity: 10000.000000)
+  Arc (11,8): 750.000000 (capacity: 10000.000000)
+  Arc (9,10): 510.000000 (capacity: 10000.000000)
+  Arc (10,13): 510.000000 (capacity: 10000.000000)
+  Arc (11,22): 150.000000 (capacity: 150.000000)
+  Arc (11,12): 300.000000 (capacity: 300.000000)
+  Arc (12,13): 180.000000 (capacity: 200.000000)
+  Arc (13,12): 120.000000 (capacity: 10000.000000)
+  Arc (13,14): 450.000000 (capacity: 10000.000000)
+  Arc (13,17): 360.000000 (capacity: 10000.000000)
+  Arc (14,18): 540.000000 (capacity: 10000.000000)
+  Arc (17,20): 120.000000 (capacity: 10000.000000)
+  Arc (18,21): 300.000000 (capacity: 10000.000000)
+  Arc (20,23): 120.000000 (capacity: 10000.000000)
+  Arc (21,24): 60.000000 (capacity: 10000.000000)
+  Arc (24,19): 90.000000 (capacity: 10000.000000)
+  Arc (22,23): 150.000000 (capacity: 10000.000000)
+  Arc (23,24): 30.000000 (capacity: 10000.000000)
+  Arc (4,5): 120.000000 (capacity: 10000.000000)
+  Arc (3,6): 400.000000 (capacity: 400.000000)
+  Arc (14,13): 480.000000 (capacity: 10000.000000)
+
+Flows per origin:
+  Origin 3: 1200.000000 units
+  Origin 11: 1200.000000 units
+
+Total flow:
+  Sum of all flows: 8910.000000
+
+Best feasible capacitated primal solution found at iteration 0 with cost 998890.000000
+
+===============================================================================
+STEP 5: GENERALIZED LINEAR PROGRAMMING (DUAL) PROBLEM
+===============================================================================
+
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+6 simplex iterations
+GLP Solution:
+  Objective value: 998890.000000
+
+Convexity weights (alpha):
+  alpha[1] = 1.000000
+
+Optimal convex combination of solutions:
+  Arc (2,1): 120.000000
+  Arc (1,4): 120.000000
+  Arc (3,2): 120.000000
+  Arc (4,9): 120.000000
+  Arc (9,4): 120.000000
+  Arc (6,5): 120.000000
+  Arc (3,7): 680.000000
+  Arc (6,14): 280.000000
+  Arc (7,14): 560.000000
+  Arc (14,7): 30.000000
+  Arc (7,19): 150.000000
+  Arc (8,9): 630.000000
+  Arc (9,8): 120.000000
+  Arc (11,8): 750.000000
+  Arc (9,10): 510.000000
+  Arc (10,13): 510.000000
+  Arc (11,22): 150.000000
+  Arc (11,12): 300.000000
+  Arc (12,13): 180.000000
+  Arc (13,12): 120.000000
+  Arc (13,14): 450.000000
+  Arc (13,17): 360.000000
+  Arc (14,18): 540.000000
+  Arc (17,20): 120.000000
+  Arc (18,21): 300.000000
+  Arc (20,23): 120.000000
+  Arc (21,24): 60.000000
+  Arc (24,19): 90.000000
+  Arc (22,23): 150.000000
+  Arc (23,24): 30.000000
+  Arc (4,5): 120.000000
+  Arc (3,6): 400.000000
+  Arc (14,13): 480.000000
+
+GLP flows by origin on each arc:
+  Origin 3, arc (2,1): 120.000000
+  Origin 3, arc (1,4): 120.000000
+  Origin 3, arc (3,2): 120.000000
+  Origin 3, arc (4,9): 120.000000
+  Origin 3, arc (6,5): 120.000000
+  Origin 3, arc (3,7): 680.000000
+  Origin 3, arc (6,14): 280.000000
+  Origin 3, arc (7,14): 560.000000
+  Origin 3, arc (7,19): 120.000000
+  Origin 3, arc (9,8): 120.000000
+  Origin 3, arc (13,12): 120.000000
+  Origin 3, arc (13,17): 240.000000
+  Origin 3, arc (14,18): 240.000000
+  Origin 3, arc (17,20): 120.000000
+  Origin 3, arc (18,21): 120.000000
+  Origin 3, arc (20,23): 120.000000
+  Origin 3, arc (3,6): 400.000000
+  Origin 3, arc (14,13): 480.000000
+  Origin 11, arc (9,4): 120.000000
+  Origin 11, arc (14,7): 30.000000
+  Origin 11, arc (7,19): 30.000000
+  Origin 11, arc (8,9): 630.000000
+  Origin 11, arc (11,8): 750.000000
+  Origin 11, arc (9,10): 510.000000
+  Origin 11, arc (10,13): 510.000000
+  Origin 11, arc (11,22): 150.000000
+  Origin 11, arc (11,12): 300.000000
+  Origin 11, arc (12,13): 180.000000
+  Origin 11, arc (13,14): 450.000000
+  Origin 11, arc (13,17): 120.000000
+  Origin 11, arc (14,18): 300.000000
+  Origin 11, arc (18,21): 180.000000
+  Origin 11, arc (21,24): 60.000000
+  Origin 11, arc (24,19): 90.000000
+  Origin 11, arc (22,23): 150.000000
+  Origin 11, arc (23,24): 30.000000
+  Origin 11, arc (4,5): 120.000000
+
+Convex Combination Flow per Origin:
+  Origin 3: 4200.000000 units
+  Origin 11: 4710.000000 units
+
+===============================================================================
+END OF ALGORITHM
+===============================================================================

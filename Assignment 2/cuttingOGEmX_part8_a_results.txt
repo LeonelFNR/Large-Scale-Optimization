@@ -1,0 +1,2250 @@
+ampl: include cuttingOGEmX_part8_a.run;
+
+STEP 1: UNCAPACITATED
+
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 824880
+37 simplex iterations
+
+STEP 2: CAPACITATED WITH ARTIFICIAL ARCS
+
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+12 simplex iterations
+
+STEP 3: CUTTING PLANE (VARIANT a_k = 1/(k+1))
+
+
+--- Iteration 1 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+  Step size ak: 0.500000
+  mu used:
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 824880
+19 simplex iterations
+  w(mu): 824880.000000
+  cTx: 824880.000000
+  INFEASIBLE
+  Gap: 174010.000000 (tol 99.889000)
+
+--- Iteration 2 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+1 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (3,6): 395.477273
+  Step size ak: 0.333333
+  mu used:
+    (3,6): 131.825758
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 789408.7879
+1 simplex iterations
+  w(mu): 789408.787879
+  cTx: 826320.000000
+  INFEASIBLE
+  Gap: 209481.212121 (tol 99.889000)
+
+--- Iteration 3 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+1 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 824.428571
+    (3,6): 2.000000
+  Step size ak: 0.250000
+  mu used:
+    (7,19): 206.107143
+    (3,6): 99.369318
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 820993.3766
+3 simplex iterations
+  w(mu): 820993.376623
+  cTx: 855000.000000
+  INFEASIBLE
+  Gap: 177896.623377 (tol 99.889000)
+
+--- Iteration 4 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+2 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 359.873016
+    (11,22): 468.746032
+  Step size ak: 0.200000
+  mu used:
+    (7,19): 236.860317
+    (11,22): 93.749206
+    (3,6): 79.495455
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 847002.7965
+2 simplex iterations
+  w(mu): 847002.796537
+  cTx: 856680.000000
+  INFEASIBLE
+  Gap: 151887.203463 (tol 99.889000)
+
+--- Iteration 5 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+1 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 132.500000
+    (11,22): 696.119048
+  Step size ak: 0.166667
+  mu used:
+    (7,19): 219.466931
+    (11,22): 194.144180
+    (3,6): 66.246212
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 864418.759
+3 simplex iterations
+  w(mu): 864418.759019
+  cTx: 869040.000000
+  INFEASIBLE
+  Gap: 134471.240981 (tol 99.889000)
+
+--- Iteration 6 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+1 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 1751.933333
+    (11,22): 927.466667
+  Step size ak: 0.142857
+  mu used:
+    (7,19): 438.390703
+    (11,22): 298.904535
+    (3,6): 56.782468
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 870022.0519
+2 simplex iterations
+  w(mu): 870022.051948
+  cTx: 908040.000000
+  INFEASIBLE
+  Gap: 128867.948052 (tol 99.889000)
+
+--- Iteration 7 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+1 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 423.843137
+    (11,12): 209.843137
+  Step size ak: 0.125000
+  mu used:
+    (7,19): 424.216865
+    (11,22): 314.521860
+    (11,12): 26.230392
+    (3,6): 49.684659
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 886130.5455
+0 simplex iterations
+  w(mu): 886130.545455
+  cTx: 908040.000000
+  INFEASIBLE
+  Gap: 112759.454545 (tol 99.889000)
+
+--- Iteration 8 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 423.843137
+    (11,12): 209.843137
+  Step size ak: 0.111111
+  mu used:
+    (7,19): 413.192769
+    (11,22): 326.668669
+    (11,12): 46.631808
+    (3,6): 44.164141
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 898303.797
+1 simplex iterations
+  w(mu): 898303.797018
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 100586.202982 (tol 99.889000)
+
+--- Iteration 9 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+1 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.100000
+  mu used:
+    (7,19): 404.373492
+    (11,22): 343.691998
+    (11,12): 63.358824
+    (3,6): 39.747727
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 908362.4173
+0 simplex iterations
+  w(mu): 908362.417316
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 90527.582684 (tol 99.889000)
+
+--- Iteration 10 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.090909
+  mu used:
+    (7,19): 397.157720
+    (11,22): 357.620177
+    (11,12): 77.044563
+    (3,6): 36.134298
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 916592.1976
+2 simplex iterations
+  w(mu): 916592.197560
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 82297.802440 (tol 99.889000)
+
+--- Iteration 11 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.083333
+  mu used:
+    (7,19): 391.144577
+    (11,22): 369.226992
+    (11,12): 88.449346
+    (3,6): 33.123106
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 923450.3478
+0 simplex iterations
+  w(mu): 923450.347763
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 75439.652237 (tol 99.889000)
+
+--- Iteration 12 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.076923
+  mu used:
+    (7,19): 386.056532
+    (11,22): 379.048143
+    (11,12): 98.099548
+    (3,6): 30.575175
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 929253.3979
+0 simplex iterations
+  w(mu): 929253.397935
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 69636.602065 (tol 99.889000)
+
+--- Iteration 13 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.071429
+  mu used:
+    (7,19): 381.695351
+    (11,22): 387.466273
+    (11,12): 106.371148
+    (3,6): 28.391234
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 934227.4409
+0 simplex iterations
+  w(mu): 934227.440940
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 64662.559060 (tol 99.889000)
+
+--- Iteration 14 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.066667
+  mu used:
+    (7,19): 377.915661
+    (11,22): 394.761986
+    (11,12): 113.539869
+    (3,6): 26.498485
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 938538.2782
+0 simplex iterations
+  w(mu): 938538.278211
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 60351.721789 (tol 99.889000)
+
+--- Iteration 15 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.062500
+  mu used:
+    (7,19): 374.608433
+    (11,22): 401.145734
+    (11,12): 119.812500
+    (3,6): 24.842330
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 942310.2608
+0 simplex iterations
+  w(mu): 942310.260823
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 56579.739177 (tol 99.889000)
+
+--- Iteration 16 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.058824
+  mu used:
+    (7,19): 371.690289
+    (11,22): 406.778453
+    (11,12): 125.347174
+    (3,6): 23.381016
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 945638.4808
+1 simplex iterations
+  w(mu): 945638.480774
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 53251.519226 (tol 99.889000)
+
+--- Iteration 17 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.055556
+  mu used:
+    (7,19): 369.096384
+    (11,22): 411.785315
+    (11,12): 130.266885
+    (3,6): 22.082071
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 948596.8985
+0 simplex iterations
+  w(mu): 948596.898509
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 50293.101491 (tol 99.889000)
+
+--- Iteration 18 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.052632
+  mu used:
+    (7,19): 366.775522
+    (11,22): 416.265138
+    (11,12): 134.668731
+    (3,6): 20.919856
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 951243.9039
+0 simplex iterations
+  w(mu): 951243.903851
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 47646.096149 (tol 99.889000)
+
+--- Iteration 19 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.050000
+  mu used:
+    (7,19): 364.686746
+    (11,22): 420.296979
+    (11,12): 138.630392
+    (3,6): 19.873864
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 953626.2087
+0 simplex iterations
+  w(mu): 953626.208658
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 45263.791342 (tol 99.889000)
+
+--- Iteration 20 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.047619
+  mu used:
+    (7,19): 362.796901
+    (11,22): 423.944836
+    (11,12): 142.214753
+    (3,6): 18.927489
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 955781.6273
+0 simplex iterations
+  w(mu): 955781.627293
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 43108.372707 (tol 99.889000)
+
+--- Iteration 21 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.045455
+  mu used:
+    (7,19): 361.078860
+    (11,22): 427.261069
+    (11,12): 145.473262
+    (3,6): 18.067149
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 957741.0988
+0 simplex iterations
+  w(mu): 957741.098780
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 41148.901220 (tol 99.889000)
+
+--- Iteration 22 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.043478
+  mu used:
+    (7,19): 359.510214
+    (11,22): 430.288934
+    (11,12): 148.448423
+    (3,6): 17.281621
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 959530.1814
+0 simplex iterations
+  w(mu): 959530.181442
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 39359.818558 (tol 99.889000)
+
+--- Iteration 23 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.041667
+  mu used:
+    (7,19): 358.072288
+    (11,22): 433.064476
+    (11,12): 151.175654
+    (3,6): 16.561553
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 961170.1739
+0 simplex iterations
+  w(mu): 961170.173882
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 37719.826118 (tol 99.889000)
+
+--- Iteration 24 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.040000
+  mu used:
+    (7,19): 356.749397
+    (11,22): 435.617976
+    (11,12): 153.684706
+    (3,6): 15.899091
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 962678.9669
+0 simplex iterations
+  w(mu): 962678.966926
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 36211.033074 (tol 99.889000)
+
+--- Iteration 25 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.038462
+  mu used:
+    (7,19): 355.528266
+    (11,22): 437.975052
+    (11,12): 156.000754
+    (3,6): 15.287587
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 964071.699
+0 simplex iterations
+  w(mu): 964071.698968
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 34818.301032 (tol 99.889000)
+
+--- Iteration 26 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.037037
+  mu used:
+    (7,19): 354.397590
+    (11,22): 440.157530
+    (11,12): 158.145243
+    (3,6): 14.721380
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 965361.2657
+0 simplex iterations
+  w(mu): 965361.265673
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 33528.734327 (tol 99.889000)
+
+--- Iteration 27 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.035714
+  mu used:
+    (7,19): 353.347676
+    (11,22): 442.184117
+    (11,12): 160.136555
+    (3,6): 14.195617
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 966558.7205
+0 simplex iterations
+  w(mu): 966558.720470
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 32331.279530 (tol 99.889000)
+
+--- Iteration 28 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.034483
+  mu used:
+    (7,19): 352.370170
+    (11,22): 444.070939
+    (11,12): 161.990534
+    (3,6): 13.706113
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 967673.5922
+0 simplex iterations
+  w(mu): 967673.592178
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 31216.407822 (tol 99.889000)
+
+--- Iteration 29 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.033333
+  mu used:
+    (7,19): 351.457831
+    (11,22): 445.831973
+    (11,12): 163.720915
+    (3,6): 13.249242
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 968714.1391
+0 simplex iterations
+  w(mu): 968714.139105
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 30175.860895 (tol 99.889000)
+
+--- Iteration 30 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.032258
+  mu used:
+    (7,19): 350.604352
+    (11,22): 447.479392
+    (11,12): 165.339658
+    (3,6): 12.821848
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 969687.554
+0 simplex iterations
+  w(mu): 969687.553973
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 29202.446027 (tol 99.889000)
+
+--- Iteration 31 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.031250
+  mu used:
+    (7,19): 349.804216
+    (11,22): 449.023847
+    (11,12): 166.857230
+    (3,6): 12.421165
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 970600.1304
+0 simplex iterations
+  w(mu): 970600.130411
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 28289.869589 (tol 99.889000)
+
+--- Iteration 32 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.030303
+  mu used:
+    (7,19): 349.052573
+    (11,22): 450.474699
+    (11,12): 168.282828
+    (3,6): 12.044766
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 971457.3992
+0 simplex iterations
+  w(mu): 971457.399187
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 27432.600813 (tol 99.889000)
+
+--- Iteration 33 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.029412
+  mu used:
+    (7,19): 348.345145
+    (11,22): 451.840207
+    (11,12): 169.624567
+    (3,6): 11.690508
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 972264.2404
+0 simplex iterations
+  w(mu): 972264.240387
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 26625.759613 (tol 99.889000)
+
+--- Iteration 34 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.028571
+  mu used:
+    (7,19): 347.678141
+    (11,22): 453.127686
+    (11,12): 170.889636
+    (3,6): 11.356494
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 973024.9764
+0 simplex iterations
+  w(mu): 973024.976376
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 25865.023624 (tol 99.889000)
+
+--- Iteration 35 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.027778
+  mu used:
+    (7,19): 347.048192
+    (11,22): 454.343638
+    (11,12): 172.084423
+    (3,6): 11.041035
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 973743.4493
+0 simplex iterations
+  w(mu): 973743.449254
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 25146.550746 (tol 99.889000)
+
+--- Iteration 36 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.027027
+  mu used:
+    (7,19): 346.452295
+    (11,22): 455.493863
+    (11,12): 173.214626
+    (3,6): 10.742629
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 974423.0858
+0 simplex iterations
+  w(mu): 974423.085761
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 24466.914239 (tol 99.889000)
+
+--- Iteration 37 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.026316
+  mu used:
+    (7,19): 345.887761
+    (11,22): 456.583550
+    (11,12): 174.285346
+    (3,6): 10.459928
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 975066.9519
+0 simplex iterations
+  w(mu): 975066.951925
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 23823.048075 (tol 99.889000)
+
+--- Iteration 38 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.025641
+  mu used:
+    (7,19): 345.352177
+    (11,22): 457.617355
+    (11,12): 175.301156
+    (3,6): 10.191725
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 975677.7993
+0 simplex iterations
+  w(mu): 975677.799312
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 23212.200688 (tol 99.889000)
+
+--- Iteration 39 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.025000
+  mu used:
+    (7,19): 344.843373
+    (11,22): 458.599470
+    (11,12): 176.266176
+    (3,6): 9.936932
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 976258.1043
+0 simplex iterations
+  w(mu): 976258.104329
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 22631.895671 (tol 99.889000)
+
+--- Iteration 40 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.024390
+  mu used:
+    (7,19): 344.359388
+    (11,22): 459.533677
+    (11,12): 177.184122
+    (3,6): 9.694568
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 976810.1018
+0 simplex iterations
+  w(mu): 976810.101784
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 22079.898216 (tol 99.889000)
+
+--- Iteration 41 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.023810
+  mu used:
+    (7,19): 343.898450
+    (11,22): 460.423398
+    (11,12): 178.058357
+    (3,6): 9.463745
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 977335.8136
+0 simplex iterations
+  w(mu): 977335.813647
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 21554.186353 (tol 99.889000)
+
+--- Iteration 42 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.023256
+  mu used:
+    (7,19): 343.458952
+    (11,22): 461.271737
+    (11,12): 178.891929
+    (3,6): 9.243658
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 977837.0738
+0 simplex iterations
+  w(mu): 977837.073794
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 21052.926206 (tol 99.889000)
+
+--- Iteration 43 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.022727
+  mu used:
+    (7,19): 343.039430
+    (11,22): 462.081515
+    (11,12): 179.687611
+    (3,6): 9.033574
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 978315.5494
+0 simplex iterations
+  w(mu): 978315.549390
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 20574.450610 (tol 99.889000)
+
+--- Iteration 44 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.022222
+  mu used:
+    (7,19): 342.638554
+    (11,22): 462.855302
+    (11,12): 180.447930
+    (3,6): 8.832828
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 978772.7594
+0 simplex iterations
+  w(mu): 978772.759404
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 20117.240596 (tol 99.889000)
+
+--- Iteration 45 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.021739
+  mu used:
+    (7,19): 342.255107
+    (11,22): 463.595447
+    (11,12): 181.175192
+    (3,6): 8.640810
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 979210.0907
+0 simplex iterations
+  w(mu): 979210.090721
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 19679.909279 (tol 99.889000)
+
+--- Iteration 46 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.021277
+  mu used:
+    (7,19): 341.887977
+    (11,22): 464.304096
+    (11,12): 181.871506
+    (3,6): 8.456963
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 979628.8122
+0 simplex iterations
+  w(mu): 979628.812195
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 19261.187805 (tol 99.889000)
+
+--- Iteration 47 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.020833
+  mu used:
+    (7,19): 341.536144
+    (11,22): 464.983219
+    (11,12): 182.538807
+    (3,6): 8.280777
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 980030.0869
+0 simplex iterations
+  w(mu): 980030.086941
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 18859.913059 (tol 99.889000)
+
+--- Iteration 48 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.020408
+  mu used:
+    (7,19): 341.198672
+    (11,22): 465.634621
+    (11,12): 183.178872
+    (3,6): 8.111781
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 980414.9831
+0 simplex iterations
+  w(mu): 980414.983126
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 18475.016874 (tol 99.889000)
+
+--- Iteration 49 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.020000
+  mu used:
+    (7,19): 340.874698
+    (11,22): 466.259968
+    (11,12): 183.793333
+    (3,6): 7.949545
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 980784.4835
+0 simplex iterations
+  w(mu): 980784.483463
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 18105.516537 (tol 99.889000)
+
+--- Iteration 50 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.019608
+  mu used:
+    (7,19): 340.563430
+    (11,22): 466.860792
+    (11,12): 184.383699
+    (3,6): 7.793672
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 981139.4936
+0 simplex iterations
+  w(mu): 981139.493591
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 17750.506409 (tol 99.889000)
+
+--- Iteration 51 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.019231
+  mu used:
+    (7,19): 340.264133
+    (11,22): 467.438506
+    (11,12): 184.951357
+    (3,6): 7.643794
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 981480.8495
+0 simplex iterations
+  w(mu): 981480.849484
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 17409.150516 (tol 99.889000)
+
+--- Iteration 52 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.018868
+  mu used:
+    (7,19): 339.976131
+    (11,22): 467.994421
+    (11,12): 185.497595
+    (3,6): 7.499571
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 981809.324
+0 simplex iterations
+  w(mu): 981809.324022
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 17080.675978 (tol 99.889000)
+
+--- Iteration 53 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.018519
+  mu used:
+    (7,19): 339.698795
+    (11,22): 468.529745
+    (11,12): 186.023602
+    (3,6): 7.360690
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 982125.6328
+0 simplex iterations
+  w(mu): 982125.632836
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 16764.367164 (tol 99.889000)
+
+--- Iteration 54 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.018182
+  mu used:
+    (7,19): 339.431544
+    (11,22): 469.045604
+    (11,12): 186.530481
+    (3,6): 7.226860
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 982430.4395
+0 simplex iterations
+  w(mu): 982430.439512
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 16459.560488 (tol 99.889000)
+
+--- Iteration 55 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.017857
+  mu used:
+    (7,19): 339.173838
+    (11,22): 469.543039
+    (11,12): 187.019258
+    (3,6): 7.097808
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 982724.3602
+0 simplex iterations
+  w(mu): 982724.360235
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 16165.639765 (tol 99.889000)
+
+--- Iteration 56 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.017544
+  mu used:
+    (7,19): 338.925174
+    (11,22): 470.023020
+    (11,12): 187.490884
+    (3,6): 6.973285
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 983007.968
+0 simplex iterations
+  w(mu): 983007.967950
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 15882.032050 (tol 99.889000)
+
+--- Iteration 57 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.017241
+  mu used:
+    (7,19): 338.685085
+    (11,22): 470.486450
+    (11,12): 187.946247
+    (3,6): 6.853056
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 983281.7961
+0 simplex iterations
+  w(mu): 983281.796089
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 15608.203911 (tol 99.889000)
+
+--- Iteration 58 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.016949
+  mu used:
+    (7,19): 338.453134
+    (11,22): 470.934171
+    (11,12): 188.386175
+    (3,6): 6.736903
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 983546.3419
+0 simplex iterations
+  w(mu): 983546.341918
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 15343.658082 (tol 99.889000)
+
+--- Iteration 59 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.016667
+  mu used:
+    (7,19): 338.228915
+    (11,22): 471.366967
+    (11,12): 188.811438
+    (3,6): 6.624621
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 983802.0696
+0 simplex iterations
+  w(mu): 983802.069553
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 15087.930447 (tol 99.889000)
+
+--- Iteration 60 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.016393
+  mu used:
+    (7,19): 338.012048
+    (11,22): 471.785573
+    (11,12): 189.222758
+    (3,6): 6.516021
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 984049.4127
+0 simplex iterations
+  w(mu): 984049.412675
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 14840.587325 (tol 99.889000)
+
+--- Iteration 61 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.016129
+  mu used:
+    (7,19): 337.802176
+    (11,22): 472.190676
+    (11,12): 189.620810
+    (3,6): 6.410924
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 984288.777
+0 simplex iterations
+  w(mu): 984288.776986
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 14601.223014 (tol 99.889000)
+
+--- Iteration 62 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.015873
+  mu used:
+    (7,19): 337.598967
+    (11,22): 472.582919
+    (11,12): 190.006225
+    (3,6): 6.309163
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 984520.5424
+0 simplex iterations
+  w(mu): 984520.542431
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 14369.457569 (tol 99.889000)
+
+--- Iteration 63 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.015625
+  mu used:
+    (7,19): 337.402108
+    (11,22): 472.962904
+    (11,12): 190.379596
+    (3,6): 6.210582
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 984745.0652
+0 simplex iterations
+  w(mu): 984745.065206
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 14144.934794 (tol 99.889000)
+
+--- Iteration 64 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.015385
+  mu used:
+    (7,19): 337.211306
+    (11,22): 473.331197
+    (11,12): 190.741478
+    (3,6): 6.115035
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 984962.6796
+0 simplex iterations
+  w(mu): 984962.679587
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 13927.320413 (tol 99.889000)
+
+--- Iteration 65 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.015152
+  mu used:
+    (7,19): 337.026287
+    (11,22): 473.688330
+    (11,12): 191.092395
+    (3,6): 6.022383
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 985173.6996
+0 simplex iterations
+  w(mu): 985173.699593
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 13716.300407 (tol 99.889000)
+
+--- Iteration 66 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.014925
+  mu used:
+    (7,19): 336.846790
+    (11,22): 474.034802
+    (11,12): 191.432836
+    (3,6): 5.932497
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 985378.4205
+0 simplex iterations
+  w(mu): 985378.420495
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 13511.579505 (tol 99.889000)
+
+--- Iteration 67 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.014706
+  mu used:
+    (7,19): 336.672572
+    (11,22): 474.371084
+    (11,12): 191.763264
+    (3,6): 5.845254
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 985577.1202
+0 simplex iterations
+  w(mu): 985577.120194
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 13312.879806 (tol 99.889000)
+
+--- Iteration 68 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.014493
+  mu used:
+    (7,19): 336.503405
+    (11,22): 474.697618
+    (11,12): 192.084115
+    (3,6): 5.760540
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 985770.0605
+0 simplex iterations
+  w(mu): 985770.060481
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 13119.939519 (tol 99.889000)
+
+--- Iteration 69 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.014286
+  mu used:
+    (7,19): 336.339070
+    (11,22): 475.014823
+    (11,12): 192.395798
+    (3,6): 5.678247
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 985957.4882
+0 simplex iterations
+  w(mu): 985957.488188
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 12932.511812 (tol 99.889000)
+
+--- Iteration 70 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.014085
+  mu used:
+    (7,19): 336.179365
+    (11,22): 475.323093
+    (11,12): 192.698702
+    (3,6): 5.598271
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 986139.6362
+0 simplex iterations
+  w(mu): 986139.636242
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 12750.363758 (tol 99.889000)
+
+--- Iteration 71 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.013889
+  mu used:
+    (7,19): 336.024096
+    (11,22): 475.622799
+    (11,12): 192.993192
+    (3,6): 5.520518
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 986316.7246
+0 simplex iterations
+  w(mu): 986316.724627
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 12573.275373 (tol 99.889000)
+
+--- Iteration 72 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.013699
+  mu used:
+    (7,19): 335.873081
+    (11,22): 475.914295
+    (11,12): 193.279613
+    (3,6): 5.444894
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 986488.9613
+0 simplex iterations
+  w(mu): 986488.961276
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 12401.038724 (tol 99.889000)
+
+--- Iteration 73 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.013514
+  mu used:
+    (7,19): 335.726148
+    (11,22): 476.197912
+    (11,12): 193.558294
+    (3,6): 5.371314
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 986656.5429
+0 simplex iterations
+  w(mu): 986656.542881
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 12233.457119 (tol 99.889000)
+
+--- Iteration 74 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.013333
+  mu used:
+    (7,19): 335.583132
+    (11,22): 476.473966
+    (11,12): 193.829542
+    (3,6): 5.299697
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 986819.6556
+0 simplex iterations
+  w(mu): 986819.655642
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 12070.344358 (tol 99.889000)
+
+--- Iteration 75 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.013158
+  mu used:
+    (7,19): 335.443881
+    (11,22): 476.742755
+    (11,12): 194.093653
+    (3,6): 5.229964
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 986978.476
+0 simplex iterations
+  w(mu): 986978.475963
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 11911.524037 (tol 99.889000)
+
+--- Iteration 76 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.012987
+  mu used:
+    (7,19): 335.308246
+    (11,22): 477.004563
+    (11,12): 194.350904
+    (3,6): 5.162043
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 987133.1711
+0 simplex iterations
+  w(mu): 987133.171080
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 11756.828920 (tol 99.889000)
+
+--- Iteration 77 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.012821
+  mu used:
+    (7,19): 335.176089
+    (11,22): 477.259658
+    (11,12): 194.601559
+    (3,6): 5.095862
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 987283.8997
+0 simplex iterations
+  w(mu): 987283.899656
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 11606.100344 (tol 99.889000)
+
+--- Iteration 78 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.012658
+  mu used:
+    (7,19): 335.047277
+    (11,22): 477.508295
+    (11,12): 194.845867
+    (3,6): 5.031358
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 987430.8123
+0 simplex iterations
+  w(mu): 987430.812318
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 11459.187682 (tol 99.889000)
+
+--- Iteration 79 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.012500
+  mu used:
+    (7,19): 334.921687
+    (11,22): 477.750715
+    (11,12): 195.084069
+    (3,6): 4.968466
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 987574.0522
+0 simplex iterations
+  w(mu): 987574.052165
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 11315.947835 (tol 99.889000)
+
+--- Iteration 80 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.012346
+  mu used:
+    (7,19): 334.799197
+    (11,22): 477.987151
+    (11,12): 195.316388
+    (3,6): 4.907127
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 987713.7552
+0 simplex iterations
+  w(mu): 987713.755224
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 11176.244776 (tol 99.889000)
+
+--- Iteration 81 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.012195
+  mu used:
+    (7,19): 334.679694
+    (11,22): 478.217819
+    (11,12): 195.543042
+    (3,6): 4.847284
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 987850.0509
+0 simplex iterations
+  w(mu): 987850.050892
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 11039.949108 (tol 99.889000)
+
+--- Iteration 82 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.012048
+  mu used:
+    (7,19): 334.563071
+    (11,22): 478.442929
+    (11,12): 195.764233
+    (3,6): 4.788883
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 987983.0623
+0 simplex iterations
+  w(mu): 987983.062327
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 10906.937673 (tol 99.889000)
+
+--- Iteration 83 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.011905
+  mu used:
+    (7,19): 334.449225
+    (11,22): 478.662680
+    (11,12): 195.980159
+    (3,6): 4.731872
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 988112.9068
+0 simplex iterations
+  w(mu): 988112.906823
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 10777.093177 (tol 99.889000)
+
+--- Iteration 84 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.011765
+  mu used:
+    (7,19): 334.338058
+    (11,22): 478.877259
+    (11,12): 196.191003
+    (3,6): 4.676203
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 988239.6962
+0 simplex iterations
+  w(mu): 988239.696155
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 10650.303845 (tol 99.889000)
+
+--- Iteration 85 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.011628
+  mu used:
+    (7,19): 334.229476
+    (11,22): 479.086849
+    (11,12): 196.396945
+    (3,6): 4.621829
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 988363.5369
+0 simplex iterations
+  w(mu): 988363.536897
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 10526.463103 (tol 99.889000)
+
+--- Iteration 86 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.011494
+  mu used:
+    (7,19): 334.123390
+    (11,22): 479.291620
+    (11,12): 196.598152
+    (3,6): 4.568704
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 988484.5307
+0 simplex iterations
+  w(mu): 988484.530726
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 10405.469274 (tol 99.889000)
+
+--- Iteration 87 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.011364
+  mu used:
+    (7,19): 334.019715
+    (11,22): 479.491738
+    (11,12): 196.794786
+    (3,6): 4.516787
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 988602.7747
+0 simplex iterations
+  w(mu): 988602.774695
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 10287.225305 (tol 99.889000)
+
+--- Iteration 88 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.011236
+  mu used:
+    (7,19): 333.918370
+    (11,22): 479.687358
+    (11,12): 196.987002
+    (3,6): 4.466037
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 988718.3615
+0 simplex iterations
+  w(mu): 988718.361496
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 10171.638504 (tol 99.889000)
+
+--- Iteration 89 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.011111
+  mu used:
+    (7,19): 333.819277
+    (11,22): 479.878632
+    (11,12): 197.174946
+    (3,6): 4.416414
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 988831.3797
+0 simplex iterations
+  w(mu): 988831.379702
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 10058.620298 (tol 99.889000)
+
+--- Iteration 90 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.010989
+  mu used:
+    (7,19): 333.722362
+    (11,22): 480.065701
+    (11,12): 197.358759
+    (3,6): 4.367882
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 988941.914
+0 simplex iterations
+  w(mu): 988941.913991
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 9948.086009 (tol 99.889000)
+
+--- Iteration 91 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.010870
+  mu used:
+    (7,19): 333.627553
+    (11,22): 480.248704
+    (11,12): 197.538576
+    (3,6): 4.320405
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 989050.0454
+0 simplex iterations
+  w(mu): 989050.045360
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 9839.954640 (tol 99.889000)
+
+--- Iteration 92 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.010753
+  mu used:
+    (7,19): 333.534784
+    (11,22): 480.427771
+    (11,12): 197.714527
+    (3,6): 4.273949
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 989155.8513
+0 simplex iterations
+  w(mu): 989155.851324
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 9734.148676 (tol 99.889000)
+
+--- Iteration 93 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.010638
+  mu used:
+    (7,19): 333.443989
+    (11,22): 480.603029
+    (11,12): 197.886733
+    (3,6): 4.228482
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 989259.4061
+0 simplex iterations
+  w(mu): 989259.406097
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 9630.593903 (tol 99.889000)
+
+--- Iteration 94 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.010526
+  mu used:
+    (7,19): 333.355104
+    (11,22): 480.774596
+    (11,12): 198.055315
+    (3,6): 4.183971
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 989360.7808
+0 simplex iterations
+  w(mu): 989360.780770
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 9529.219230 (tol 99.889000)
+
+--- Iteration 95 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.010417
+  mu used:
+    (7,19): 333.268072
+    (11,22): 480.942590
+    (11,12): 198.220384
+    (3,6): 4.140388
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 989460.0435
+0 simplex iterations
+  w(mu): 989460.043470
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 9429.956530 (tol 99.889000)
+
+--- Iteration 96 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.010309
+  mu used:
+    (7,19): 333.182834
+    (11,22): 481.107119
+    (11,12): 198.382050
+    (3,6): 4.097704
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 989557.2595
+0 simplex iterations
+  w(mu): 989557.259517
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 9332.740483 (tol 99.889000)
+
+--- Iteration 97 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.010204
+  mu used:
+    (7,19): 333.099336
+    (11,22): 481.268291
+    (11,12): 198.540416
+    (3,6): 4.055891
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 989652.4916
+0 simplex iterations
+  w(mu): 989652.491563
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 9237.508437 (tol 99.889000)
+
+--- Iteration 98 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.010101
+  mu used:
+    (7,19): 333.017524
+    (11,22): 481.426207
+    (11,12): 198.695583
+    (3,6): 4.014922
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 989745.7997
+0 simplex iterations
+  w(mu): 989745.799729
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 9144.200271 (tol 99.889000)
+
+--- Iteration 99 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.010000
+  mu used:
+    (7,19): 332.937349
+    (11,22): 481.580965
+    (11,12): 198.847647
+    (3,6): 3.974773
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 989837.2417
+0 simplex iterations
+  w(mu): 989837.241732
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 9052.758268 (tol 99.889000)
+
+--- Iteration 100 ---
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+0 simplex iterations
+  zk: 998890.000000
+  mu_hat:
+    (7,19): 325.000000
+    (11,22): 496.901961
+    (11,12): 213.901961
+  Step size ak: 0.009901
+  mu used:
+    (7,19): 332.858762
+    (11,22): 481.732658
+    (11,12): 198.996700
+    (3,6): 3.935419
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 989926.873
+0 simplex iterations
+  w(mu): 989926.873002
+  cTx: 874080.000000
+  INFEASIBLE
+  Gap: 8963.126998 (tol 99.889000)
+STOP: max iterations
+
+STEP 5: GLP
+
+CPLEX 22.1.2:               CPLEX 22.1.2: optimal solution; objective 998890
+8 simplex iterations
+GLP Obj: 998890.000000
+alpha[1] = 1.000000
+
+===============================================================================
+FINAL RESULTS
+===============================================================================
+
+STATUS: No feasible solution found within max iterations.
+
+Algorithm Summary:
+  Total iterations: 100
+  Master value (zk): 998890.000000
+  Subproblem value (w(mu_k)): 989926.873002
+  Gap: 8963.126998
+
+Final dual variables (mu_hat from last master):
+  Arc (7,19): 325.000000
+  Arc (11,22): 496.901961
+  Arc (11,12): 213.901961
+
+Best solution (flows):
+  Arc (2,1): 120.000000 (capacity 10000.000000)
+  Arc (1,4): 120.000000 (capacity 10000.000000)
+  Arc (3,2): 120.000000 (capacity 10000.000000)
+  Arc (4,9): 120.000000 (capacity 10000.000000)
+  Arc (9,4): 120.000000 (capacity 10000.000000)
+  Arc (6,5): 120.000000 (capacity 10000.000000)
+  Arc (3,7): 680.000000 (capacity 10000.000000)
+  Arc (6,14): 280.000000 (capacity 300.000000)
+  Arc (7,14): 560.000000 (capacity 10000.000000)
+  Arc (14,7): 30.000000 (capacity 10000.000000)
+  Arc (7,19): 150.000000 (capacity 150.000000)
+  Arc (8,9): 630.000000 (capacity 10000.000000)
+  Arc (9,8): 120.000000 (capacity 10000.000000)
+  Arc (11,8): 750.000000 (capacity 10000.000000)
+  Arc (9,10): 510.000000 (capacity 10000.000000)
+  Arc (10,13): 510.000000 (capacity 10000.000000)
+  Arc (11,22): 150.000000 (capacity 150.000000)
+  Arc (11,12): 300.000000 (capacity 300.000000)
+  Arc (12,13): 180.000000 (capacity 200.000000)
+  Arc (13,12): 120.000000 (capacity 10000.000000)
+  Arc (13,14): 450.000000 (capacity 10000.000000)
+  Arc (13,17): 360.000000 (capacity 10000.000000)
+  Arc (14,18): 540.000000 (capacity 10000.000000)
+  Arc (17,20): 120.000000 (capacity 10000.000000)
+  Arc (18,21): 300.000000 (capacity 10000.000000)
+  Arc (20,23): 120.000000 (capacity 10000.000000)
+  Arc (21,24): 60.000000 (capacity 10000.000000)
+  Arc (24,19): 90.000000 (capacity 10000.000000)
+  Arc (22,23): 150.000000 (capacity 10000.000000)
+  Arc (23,24): 30.000000 (capacity 10000.000000)
+  Arc (4,5): 120.000000 (capacity 10000.000000)
+  Arc (3,6): 400.000000 (capacity 400.000000)
+  Arc (14,13): 480.000000 (capacity 10000.000000)
+
+Flow per origin:
+  Origin 3: 1200.000000 units
+  Origin 11: 1200.000000 units
+
+Total flow in network:
+  8910.000000
+
+===============================================================================
+GLP RESULTS
+===============================================================================
+GLP objective value: 998890.000000
+
+Convex combination weights:
+  alpha[1] = 1.000000
+
+GLP total flows:
+  Arc (2,1): 120.000000
+  Arc (1,4): 120.000000
+  Arc (3,2): 120.000000
+  Arc (4,9): 120.000000
+  Arc (9,4): 120.000000
+  Arc (6,5): 120.000000
+  Arc (3,7): 680.000000
+  Arc (6,14): 280.000000
+  Arc (7,14): 560.000000
+  Arc (14,7): 30.000000
+  Arc (7,19): 150.000000
+  Arc (8,9): 630.000000
+  Arc (9,8): 120.000000
+  Arc (11,8): 750.000000
+  Arc (9,10): 510.000000
+  Arc (10,13): 510.000000
+  Arc (11,22): 150.000000
+  Arc (11,12): 300.000000
+  Arc (12,13): 180.000000
+  Arc (13,12): 120.000000
+  Arc (13,14): 450.000000
+  Arc (13,17): 360.000000
+  Arc (14,18): 540.000000
+  Arc (17,20): 120.000000
+  Arc (18,21): 300.000000
+  Arc (20,23): 120.000000
+  Arc (21,24): 60.000000
+  Arc (24,19): 90.000000
+  Arc (22,23): 150.000000
+  Arc (23,24): 30.000000
+  Arc (4,5): 120.000000
+  Arc (3,6): 400.000000
+  Arc (14,13): 480.000000
+
+GLP flows by origin:
+  Origin 3, arc (2,1): 120.000000
+  Origin 3, arc (1,4): 120.000000
+  Origin 3, arc (3,2): 120.000000
+  Origin 3, arc (4,9): 120.000000
+  Origin 3, arc (6,5): 120.000000
+  Origin 3, arc (3,7): 680.000000
+  Origin 3, arc (6,14): 280.000000
+  Origin 3, arc (7,14): 560.000000
+  Origin 3, arc (7,19): 120.000000
+  Origin 3, arc (9,8): 120.000000
+  Origin 3, arc (13,12): 120.000000
+  Origin 3, arc (13,17): 240.000000
+  Origin 3, arc (14,18): 240.000000
+  Origin 3, arc (17,20): 120.000000
+  Origin 3, arc (18,21): 120.000000
+  Origin 3, arc (20,23): 120.000000
+  Origin 3, arc (3,6): 400.000000
+  Origin 3, arc (14,13): 480.000000
+  Origin 11, arc (9,4): 120.000000
+  Origin 11, arc (14,7): 30.000000
+  Origin 11, arc (7,19): 30.000000
+  Origin 11, arc (8,9): 630.000000
+  Origin 11, arc (11,8): 750.000000
+  Origin 11, arc (9,10): 510.000000
+  Origin 11, arc (10,13): 510.000000
+  Origin 11, arc (11,22): 150.000000
+  Origin 11, arc (11,12): 300.000000
+  Origin 11, arc (12,13): 180.000000
+  Origin 11, arc (13,14): 450.000000
+  Origin 11, arc (13,17): 120.000000
+  Origin 11, arc (14,18): 300.000000
+  Origin 11, arc (18,21): 180.000000
+  Origin 11, arc (21,24): 60.000000
+  Origin 11, arc (24,19): 90.000000
+  Origin 11, arc (22,23): 150.000000
+  Origin 11, arc (23,24): 30.000000
+  Origin 11, arc (4,5): 120.000000
+
+GLP flow per origin:
+  Origin 3: 4200.000000 units
+  Origin 11: 4710.000000 units
+
+===============================================================================
+END
+===============================================================================
