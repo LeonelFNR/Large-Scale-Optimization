@@ -7,6 +7,15 @@
 #(11,22): 360
 #(14,13): 360
 
+set ACAP :=
+3 6
+6 14
+11 12
+12 13
+7 19
+11 22
+;
+
 # the boundary will be half its current flow
 
 param y :=
