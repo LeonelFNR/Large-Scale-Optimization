@@ -79,22 +79,7 @@ for {(i,j) in links: v[i,j] > 1e-6 or abs(vv[i,j]-v[i,j]) > 1e-6} {
 # ---------------------------------------------------------------
 # RESTRICTED SIMPLICIAL DECOMPOSITION ALGORITHM
 # ---------------------------------------------------------------
-#
-# Two fixes applied together:
-#
-# FIX A – MINOS alpha leakage:
-#   Before each solve, use 'fix alpha[k]:=0' for all inactive vertices.
-#   This removes them from MINOS's variable space entirely, so they cannot
-#   accumulate numerical weight and corrupt the AlphaSum constraint.
-#   After the solve, 'unfix' them so they can be reset in the next iteration.
-#
-# FIX B – rho=8 instead of rho=4:
-#   With rho=4, this problem instance hits a genuine 2-cycle (not a bug):
-#   the equilibrium cannot be represented as a convex combination of only
-#   4 extreme flow vectors. Increasing rho to 8 gives the algorithm enough
-#   representational capacity to escape the cycle and converge.
-#   This is an interesting result in itself and worth discussing in the report.
-# ---------------------------------------------------------------
+
 
 printf "RSD ALGORITHM rho=%d\n", rho > "RSD_results.txt";
 printf "iter; objective; relative_gap; active_vertices; alphas\n" >> "RSD_results.txt";
