@@ -1,0 +1,195 @@
+reset;
+
+model MinCM2_completed.mod;
+data net_previous_assignments.dat;
+
+option solver minos;
+option display_eps 1e-6;
+option omit_zero_rows 1;
+option display_1col 20;
+
+problem AoN:    v_k, v, N, flux_total, Vg;
+problem Q:      v_k, v, N, flux_total, Vnl;
+problem RSD_MP: alpha, xbar, AlphaSum, AlphaActive, RSD_link, RSD_Obj;
+
+param eps    default 0.0005;
+param maxit  default 500;
+param rho    integer default 4;
+param l      integer;
+param pSTOP  integer;
+param alfa;
+param relgap;
+param abs_gap;
+param f_obj;
+param vv  {links} default 0;
+param yfw {links} default 0;
+param dir {links} default 0;
+
+# ---------------------------------------------------------------
+# FRANK-WOLFE ALGORITHM
+# ---------------------------------------------------------------
+
+printf "FRANK-WOLFE ALGORITHM\n" > "FW_results.txt";
+printf "iter; objective; relative_gap; alpha\n" >> "FW_results.txt";
+
+let {(i,j) in links} t0[i,j] := c[i,j];
+solve AoN;
+let {(i,j) in links} vv[i,j] := v[i,j];
+
+let pSTOP := 0;
+let l := 1;
+
+repeat while l <= maxit and pSTOP = 0 {
+    let {(i,j) in links} t0[i,j] := c[i,j] + cap[i,j]*vv[i,j];
+    solve AoN;
+    let {(i,j) in links} yfw[i,j] := v[i,j];
+    let {(i,j) in links} dir[i,j] := yfw[i,j] - vv[i,j];
+
+    let f_obj   := sum {(i,j) in links} (c[i,j]*vv[i,j] + 0.5*cap[i,j]*vv[i,j]^2);
+    let abs_gap := -sum {(i,j) in links} t0[i,j]*dir[i,j];
+    let relgap  := abs_gap / max(1, sum {(i,j) in links} t0[i,j]*vv[i,j]);
+
+    let alfa := abs_gap / max(1e-12, sum {(i,j) in links} cap[i,j]*dir[i,j]^2);
+    if alfa > 1 then let alfa := 1;
+    if alfa < 0 then let alfa := 0;
+
+    printf "%d; %.10f; %.10f; %.10f\n", l, f_obj, relgap, alfa >> "FW_results.txt";
+
+    if relgap <= eps then { let pSTOP := 1; }
+    else {
+        let {(i,j) in links} vv[i,j] := vv[i,j] + alfa*dir[i,j];
+        let l := l + 1;
+    }
+}
+
+printf "\nFW final link flows vv:\n" >> "FW_results.txt";
+for {(i,j) in links: vv[i,j] > 1e-6} {
+    printf "(%d,%d): %.10f\n", i, j, vv[i,j] >> "FW_results.txt";
+}
+
+solve Q;
+printf "\nDIRECT NONLINEAR EQUILIBRIUM SOLUTION\n" >> "FW_results.txt";
+printf "Direct objective: %.10f\n", Vnl >> "FW_results.txt";
+printf "Comparison direct v and FW vv-v:\n" >> "FW_results.txt";
+for {(i,j) in links: v[i,j] > 1e-6 or abs(vv[i,j]-v[i,j]) > 1e-6} {
+    printf "(%d,%d): direct=%.10f FW_minus_direct=%.10f\n",
+           i, j, v[i,j], vv[i,j]-v[i,j] >> "FW_results.txt";
+}
+
+# ---------------------------------------------------------------
+# RESTRICTED SIMPLICIAL DECOMPOSITION ALGORITHM
+# ---------------------------------------------------------------
+#
+# Correct structure (Hearn, Lawphongpanich, Ventura 1987):
+#
+#  Per iteration:
+#   1. AoN at current vv → y_new  (new vertex candidate)
+#   2. Add y_new to working set (now has rho+1 vertices if full)
+#   3. WARM-START: reset ALL alpha to 0 for inactive, 1/nactive for active
+#      (prevents MINOS from inheriting stale values on inactive variables)
+#   4. Solve RSD_MP over the rho+1 vertex set
+#   5. vv := xbar  (update incumbent from full solve)
+#   6. DROP: remove the vertex with minimum fresh alpha (for next iter)
+#   7. Recompute relgap at new vv; check convergence
+#
+# Step 3 (warm-start) + step 6 (drop AFTER solve) is the critical combination.
+# Step 3 alone (fixed2): drop happens before solve → new vertex always redundant.
+# Step 6 alone (fixed):  stale warm-start → inactive alphas nonzero → xbar drifts.
+# Both together (v3):    clean solve over rho+1 set, then correct drop.
+# ---------------------------------------------------------------
+
+printf "RSD ALGORITHM rho=%d\n", rho > "RSD_results.txt";
+printf "iter; objective; relative_gap; active_vertices; alphas\n" >> "RSD_results.txt";
+
+param nactive integer default 0;
+param kdrop   integer default 1;
+param minAlpha default Infinity;
+
+let nVERT := 0;
+let {k in 1..maxVERT} activeVertex[k] := 0;
+let {(i,j) in links, k in 1..maxVERT} vertexFlow[i,j,k] := 0;
+let {k in 1..maxVERT} alpha[k] := 0;
+let {(i,j) in links} xbar[i,j] := 0;
+
+# --- Initial vertex: AoN at free-flow costs ---
+let {(i,j) in links} t0[i,j] := c[i,j];
+solve AoN;
+
+let nVERT := 1;
+let activeVertex[1] := 1;
+let {(i,j) in links} vertexFlow[i,j,1] := v[i,j];
+let {(i,j) in links} vv[i,j] := v[i,j];
+let nactive := 1;
+
+let pSTOP := 0;
+let l := 1;
+
+repeat while l <= maxit and pSTOP = 0 {
+
+    # Step 1: AoN at current vv
+    let {(i,j) in links} t0[i,j] := c[i,j] + cap[i,j]*vv[i,j];
+    solve AoN;
+    let {(i,j) in links} yfw[i,j] := v[i,j];
+
+    # Step 2: Add new vertex to working set
+    let nVERT   := nVERT + 1;
+    let activeVertex[nVERT] := 1;
+    let {(i,j) in links} vertexFlow[i,j,nVERT] := yfw[i,j];
+    let nactive := nactive + 1;
+
+    # Step 3: Clean warm-start — uniform over active, zero for inactive.
+    # This is essential: without it, MINOS inherits stale nonzero alpha
+    # values on "inactive" vertices (those with activeVertex[k]=0),
+    # causing the alpha sum constraint to be satisfied with weight on
+    # inactive vertices, making xbar drift off the intended convex hull.
+    let {k in 1..nVERT} alpha[k] :=
+        if activeVertex[k] = 1 then 1.0/nactive else 0.0;
+    let {(i,j) in links} xbar[i,j] := vv[i,j];
+
+    # Step 4: Solve master QP over current working set (rho+1 vertices)
+    solve RSD_MP;
+
+    # Step 5: Update incumbent from master solution
+    let {(i,j) in links} vv[i,j] := xbar[i,j];
+    let f_obj := RSD_Obj;
+
+    # Step 6: Drop vertex with minimum fresh alpha (for next iteration)
+    if nactive > rho then {
+        let minAlpha := Infinity;
+        let kdrop := 1;
+        for {k in 1..nVERT: activeVertex[k] = 1} {
+            if alpha[k] < minAlpha then {
+                let minAlpha := alpha[k];
+                let kdrop := k;
+            }
+        }
+        let activeVertex[kdrop] := 0;
+        let nactive := nactive - 1;
+    }
+
+    # Step 7: Compute relgap at new vv and check convergence
+    let {(i,j) in links} t0[i,j] := c[i,j] + cap[i,j]*vv[i,j];
+    solve AoN;
+    let {(i,j) in links} dir[i,j] := v[i,j] - vv[i,j];
+    let abs_gap := -sum {(i,j) in links} t0[i,j]*dir[i,j];
+    let relgap  := abs_gap / max(1, sum {(i,j) in links} t0[i,j]*vv[i,j]);
+
+    printf "%d; %.10f; %.10f; %d; ", l, f_obj, relgap, nactive >> "RSD_results.txt";
+    for {k in 1..nVERT: activeVertex[k] = 1} {
+        printf "alpha[%d]=%.8f ", k, alpha[k] >> "RSD_results.txt";
+    }
+    printf "\n" >> "RSD_results.txt";
+
+    if relgap <= eps then { let pSTOP := 1; }
+    else { let l := l + 1; }
+}
+
+printf "\nRSD final link flows vv:\n" >> "RSD_results.txt";
+for {(i,j) in links: vv[i,j] > 1e-6} {
+    printf "(%d,%d): %.10f\n", i, j, vv[i,j] >> "RSD_results.txt";
+}
+printf "\nRSD final active barycentric coordinates:\n" >> "RSD_results.txt";
+for {k in 1..nVERT: activeVertex[k] = 1} {
+    printf "alpha[%d]=%.10f\n", k, alpha[k] >> "RSD_results.txt";
+}
+printf "\nDone. Results in FW_results.txt and RSD_results.txt\n";
