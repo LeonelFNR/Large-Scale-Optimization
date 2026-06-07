@@ -14,7 +14,7 @@ problem RSD_MP: alpha, xbar, AlphaSum, AlphaActive, RSD_link, RSD_Obj;
 
 param eps    default 0.0005;
 param maxit  default 500;
-param rho    integer default 8;   # rho=4 causes a genuine 2-cycle on this instance
+param rho    integer default 4;   # rho=4 causes a genuine 2-cycle on this instance
 param l      integer;
 param pSTOP  integer;
 param alfa;
